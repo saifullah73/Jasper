@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorA">#ff5e00</color>
+    <color name="colorB">#212121</color>
+    <color name="colorC">#444444</color>
+    <color name="colorD">#808080</color>
+    <color name="colorE">#c4c4c4</color>
+    <color name="lesserwhite">#e1e1e1</color>
+    <color name="lesswhite">#f3f3f3</color>
+    <color name="fullwhite">#ffffff</color>
+    <color name="colorI">#ff0000</color>
+    <color name="colorJ">#ffa645</color>
+    <color name="colorK">#3eb5c0</color>
+    <color name="colorL">#96c11f</color>
+    <color name="darkRed">#8B0000</color>
+    <color name="darkestRed">#5c0101</color>
+    <color name="primary_dark">#212121</color>
+    <color name="recyclerViewBackground">#f3f3f3</color>
+    <color name="recyclerViewItemBackground">#808080</color>
+    <color name="recyclerViewSelectedItemBackground">#e1e1e1</color>
+    <color name="buttonTextColorSelected">#15B66C</color>
+    <color name="buttonTextColorNonSelected">#BDBDBD</color>
+    <color name="rejectButtonColor">#F44140</color>
+    <color name="smsButtonColor">#52AFD3</color>
+    <color name="eraseButtonColor">#6D6D6D</color>
+    <color name="contactFragmentBackgroundColor">#F1F1F1</color>
+    <color name="buttonDisabledGray">#444444</color>
+    <color name="notification_color_led">#FF8000</color>
+    <color name="unselectedItemTextColor">#212121</color>
+    <color name="selectedItemTextColor">#80CBC4</color>
+    <color name="primaryTextColor">#000</color>
+    <color name="secondaryTextColor">#212121</color>
+    <color name="transparent">#00FF0000</color>
+    <color name="colorGradientStart">#610034</color>
+    <color name="colorGradientCenter">#3F0000</color>
+    <color name="colorGradientEnd">#353535</color>
+    <color name="pttButtonPrimaryColor">#1D1D1D</color>
+    <color name="darkerGray">#AAAAAA</color>
+
+    <!-- New Colors -->
+
+    <!-- Chat Activity Colors -->
+
+    <color name="chatActivityPrimaryColor">#1B2936</color>
+    <color name="chatActivityPrimaryDarkColor">#121A25</color>
+    <color name="chatActivityAccentColor">#1DAEF9</color>
+    <color name="chatActivityOpenCameraButtonColor">#2AC78A</color>
+    <color name="chatActivitySenddocumentButtonColor">#5157AE</color>
+    <color name="chatActivityOpengalleryButtonColor">#702A8B</color>
+    <color name="chatActivitySendlocationButtonColor">#F96358</color>
+    <color name="chatActivityMyMessageBodyColor">#317C37</color>
+    <color name="chatActivitysendIconButtonColorNotActive">#606771</color>
+    <color name="chatActivitysendButtonIconColorActive">#A9B0BA</color>
+    <color name="chatActivityOtherMessageBodyColor">#2B3541</color>
+    <color name="chatActivityMainlayoutBackgroundColor">#121E2C</color>
+    <color name="chatActivityDateAndStatusColor">#566877</color>
+    <color name="selectedItemLayoutColor">#8A93BD</color>
+
+    <!-- MainActivity Colors -->
+    <color name="mainActivityPrimaryColor">#1B2936</color>
+    <color name="mainActivityPrimaryDarkColor">#121A25</color>
+    <color name="mainActivityAccentColor">#1DAEF9</color>
+    <color name="mainActivityTabIndicatorColor">#1DAEF9</color>
+
+
+    <color name="darkerGray2">#707070</color>
+    <color name="green">#317C37</color>
+    <color name="darkerGray3">#3C3C3C</color>
+    <color name="smsBackgroundColor">#317C37</color>
+    <color name="layoutBackgroundColor">#121E2C</color>
+    <color name="sendIconColorNotActive">#606771</color>
+    <color name="sendIconColorActive">#A9B0BA</color>
+    <color name="ChatActivityPrimaryDark">#121A25</color>
+    <color name="ChatActivityPrimary">#1F3957</color>
+    <color name="ChatActivityAccent">#1DAEF9</color>
+    <color name="cameraButtonColor">#2AC78A</color>
+    <color name="documentButtonColor">#5157AE</color>
+    <color name="galleryButtonColor">#702A8B</color>
+    <color name="locationButtonColor">#F96358</color>
+    <color name="messageBodyColor">#317C37</color>
+</resources>
