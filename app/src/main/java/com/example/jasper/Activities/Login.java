@@ -10,8 +10,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.jasper.Activities.MainActivity.MainActivity;
 import com.example.jasper.R;
-import com.example.jasper.xmpp.XMPPConnection;
+import com.example.jasper.AppBackend.Xmpp.XMPPConnection;
 
 public class Login extends AppCompatActivity {
     
@@ -74,7 +75,7 @@ public class Login extends AppCompatActivity {
             public void run() {
                 progressBar.setVisibility(View.GONE);
                 Log.e(TAG, "run: auth done and connected successfully" );
-                Intent i = new Intent(Login.this, ChatListActivity.class);
+                Intent i = new Intent(Login.this, MainActivity.class);
                 startActivity(i);
             }
         });

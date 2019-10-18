@@ -11,15 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.ChatListActivity"></activity>
+        <activity android:name=".Activities.MainActivity.MainActivity"></activity>
+        <activity android:name=".Activities.ImageDetailActivity" />
+        <activity
+            android:name=".Activities.Chat.ChatActivity"
+            android:theme="@style/chatActivityStyle">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.MainActivity.Fragments.ChatListFragment" />
+        </activity>
+        <activity android:name=".Activities.MainActivity.Fragments.ChatListFragment"
+            android:theme="@style/mainActivityStyle">
+        </activity>
         <activity android:name=".Activities.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.MainActivity"></activity>
     </application>
 
 </manifest>

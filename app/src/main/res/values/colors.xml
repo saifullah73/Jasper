@@ -60,7 +60,7 @@
     <color name="chatActivityDateAndStatusColor">#566877</color>
     <color name="selectedItemLayoutColor">#8A93BD</color>
 
-    <!-- MainActivity Colors -->
+    <!-- ChatActivity Colors -->
     <color name="mainActivityPrimaryColor">#1B2936</color>
     <color name="mainActivityPrimaryDarkColor">#121A25</color>
     <color name="mainActivityAccentColor">#1DAEF9</color>

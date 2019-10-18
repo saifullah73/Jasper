@@ -1,4 +1,4 @@
-package com.example.jasper.xmpp;
+package com.example.jasper.AppBackend.Xmpp;
 
 import com.example.jasper.Activities.Login;
 

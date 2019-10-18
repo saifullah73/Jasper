@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/chatActivityMainlayoutBackgroundColor"
+    android:windowSoftInputMode="stateHidden|adjustResize"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/sms_box"
+        android:layout_below="@id/appBar"
+        android:layout_marginTop="8dp"
+        android:scrollbars="vertical">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/extra_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/sms_box"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/background_for_chat_activity"
+        android:elevation="24dp"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/open_camera"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/ic_camera_alt_black_24dp"
+                app:cb_color="@color/chatActivityOpenCameraButtonColor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Camera"
+                android:textColor="@color/fullwhite" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/open_gallery_btn"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/ic_photo_library_black_24dp"
+                app:cb_color="@color/chatActivityOpengalleryButtonColor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gallery"
+                android:textColor="@color/fullwhite" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/send_location_btn"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/ic_location_on_black_24dp"
+                app:cb_color="@color/chatActivitySendlocationButtonColor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location"
+                android:textColor="@color/fullwhite" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/send_file_btn"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/ic_insert_drive_file_black_24dp"
+                app:cb_color="@color/chatActivitySenddocumentButtonColor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Document"
+                android:textColor="@color/fullwhite" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/scroll_to_bottom_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_above="@id/sms_box"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        android:layout_marginBottom="8dp"
+        android:elevation="20dp"
+        android:background="@drawable/background_for_scroll_bottom_btn"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_arrow_downward_black_24dp" />
+
+    <FrameLayout
+        android:id="@+id/sms_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:background="@drawable/background_for_chat_activity"
+        android:elevation="24dp"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/insert_extra_btn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="start|bottom"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_add_black_24dp" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/enter_msg_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:background="@null"
+            android:hint="Enter Message"
+            android:inputType="text|textNoSuggestions|textMultiLine"
+            android:textColor="@color/chatActivitysendButtonIconColorActive"
+            android:textColorHint="@color/chatActivitysendButtonIconColorActive"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/send_sms_btn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom|end"
+            android:background="@color/transparent"
+            android:padding="4dp"
+            android:src="@drawable/ic_send_black_24dp" />
+
+    </FrameLayout>
+
+
+</RelativeLayout>

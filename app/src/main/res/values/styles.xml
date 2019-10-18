@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/mainActivityPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/mainActivityPrimaryDarkColor</item>
+        <item name="colorAccent">@color/mainActivityAccentColor</item>
     </style>
 
     <style name="checkBoxStyle" parent="Base.Theme.AppCompat">
@@ -28,5 +28,28 @@
         <item name="colorAccent">@color/mainActivityTabIndicatorColor</item>
     </style>
 
+    <!-- About Activity Progress bar Style -->
+    <style name="chatActivityProgressStyle" parent="mainActivityStyle">
+        <item name="colorPrimary">@color/mainActivityPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/mainActivityPrimaryDarkColor</item>
+        <item name="colorAccent">@color/chatActivityMainlayoutBackgroundColor</item>
+    </style>
+
+    <style name="chatActivityStyle" parent="mainActivityStyle">
+        <item name="colorPrimary">@color/chatActivityPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/chatActivityPrimaryDarkColor</item>
+        <item name="colorAccent">@color/chatActivityAccentColor</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="tabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/mainActivityTabIndicatorColor</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">6dp</item>
+        <item name="tabPaddingEnd">6dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <!--        <item name="tabTextAppearance">@style/AppTabTextAppearance</item>-->
+    </style>
 
 </resources>

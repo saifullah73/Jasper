@@ -2,12 +2,32 @@ package com.example.jasper.Models;
 
 
 public class MessageModel {
-    private String heading,messages;
+    private String messages,status;
     private String imageMsgStatus;
     private boolean isDecorated;
     private long date;
     private String msgType;
     private boolean expandable, isSender, isSelected;
+    private int storageId;
+
+
+    public MessageModel(String head, String mess){
+        messages = mess;
+        status = "sent";
+        msgType = "text";
+        date = 123;
+        expandable = false;
+        isDecorated = false;
+        if(head.equals("received")){
+            isSender = false;
+        }
+        else{
+            isSender = true;
+        }
+        isSelected = false;
+        imageMsgStatus = "uploadable";
+    }
+
 
     public String getImageMsgStatus() {
         return imageMsgStatus;
@@ -19,6 +39,10 @@ public class MessageModel {
 
     public long getDate() {
         return date;
+    }
+
+    public int getStorageId() {
+        return storageId;
     }
 
     public String getMsgType() {
@@ -34,14 +58,6 @@ public class MessageModel {
     }
     public boolean getSender() {
         return isSender;
-    }
-
-    public void setHeading(String heading) {
-        this.heading = heading;
-    }
-
-    public void setMessages(String messages) {
-        this.messages = messages;
     }
 
     public void setImageMsgStatus(String imageMsgStatus) {
@@ -64,24 +80,17 @@ public class MessageModel {
         this.expandable = expandable;
     }
 
-    public void setSender(boolean sender) {
-        isSender = sender;
-    }
-
     public void setSelected(boolean selected) {
         isSelected = selected;
     }
-
-
-
-    public MessageModel(String head, String mess){
-        heading = head;
-        messages = mess;
-    }
-    public String getHeading(){
-        return heading;
-    }
     public String getMessages(){
         return messages;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

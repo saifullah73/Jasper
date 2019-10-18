@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 
-import com.example.jasper.Activities.MainActivity;
 import com.example.jasper.Interfaces.ChatListClickListener;
 import com.example.jasper.Models.Contact;
 import com.example.jasper.R;
@@ -53,7 +52,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
             holder.usernameview.setTypeface(null, Typeface.BOLD);
             holder.unreadMessageView.setText(String.valueOf(contact.getUnreadMessageCount()));
             holder.unreadMessageView.setVisibility(View.VISIBLE);
-            //MainActivity.getInstance().updateMissedChatCount();
+            //ChatActivity.getInstance().updateMissedChatCount();
             if (contact.getUnreadMessageCount() > 99) {
                 holder.unreadMessageView.setText("99+");
             }
@@ -61,7 +60,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
             holder.unreadMessageView.setVisibility(View.GONE);
             holder.usernameview.setTypeface(null, Typeface.NORMAL);
         }
-        //holder.timestampView.setText(SygnalUtils.timestampToHumanDate(MainActivity.getInstance(), chatRoom.getLastMessageTime(), ChatListFragment.getInstance().getString(R.string.messages_list_date_format)));
+        //holder.timestampView.setText(SygnalUtils.timestampToHumanDate(ChatActivity.getInstance(), chatRoom.getLastMessageTime(), ChatListFragment.getInstance().getString(R.string.messages_list_date_format)));
 
 
         holder.layout.setOnClickListener(holder);

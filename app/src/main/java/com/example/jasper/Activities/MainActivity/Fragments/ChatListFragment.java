@@ -1,27 +1,23 @@
-package com.example.jasper.Activities;
+package com.example.jasper.Activities.MainActivity.Fragments;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
+import com.example.jasper.Activities.Chat.ChatActivity;
 import com.example.jasper.Adapters.ChatListAdapter;
+import com.example.jasper.AppBackend.Xmpp.XmppCore;
 import com.example.jasper.Interfaces.ChatListClickListener;
 import com.example.jasper.Models.Contact;
 import com.example.jasper.R;
-import com.example.jasper.xmpp.XMPPConnection;
-import org.jivesoftware.smack.roster.Roster;
-import org.jivesoftware.smack.roster.RosterEntry;
 
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -29,38 +25,33 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
 
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
-public class ChatListActivity extends AppCompatActivity implements ChatListClickListener{
-
+public class ChatListFragment extends Fragment implements ChatListClickListener{
 
     private static final String TAG = "ChatListFragment";
-    private View view;
-    private AppCompatButton button;
     private RecyclerView recyclerView;
+    private View view;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ChatListAdapter chatListAdapter;
-    private static ChatListActivity mInstance;
+    private static ChatListFragment mInstance;
     private TextView noChatsToShowView;
     private FloatingActionButton addNewChat, deletechat, selectDeselect;
     private ConstraintLayout.LayoutParams params;
     private boolean isDeleteMode;
     private List<Contact> chatroomList = new ArrayList<>();
 
+    public ChatListFragment() {
+    }
 
-    public static ChatListActivity getInstance(){
+
+    public static ChatListFragment getInstance(){
         if(mInstance == null){
-            mInstance = new ChatListActivity();
+            mInstance = new ChatListFragment();
         }
         return mInstance;
     }
@@ -68,25 +59,26 @@ public class ChatListActivity extends AppCompatActivity implements ChatListClick
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chatlistactivity);
-        initComponents();
-
-
-
     }
 
-
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.chatlistfragment, container, false);
+        initComponents();
+        return view;
+    }
 
     private void initComponents() {
-        recyclerView = findViewById(R.id.chatList_recylerView);
+        recyclerView = view.findViewById(R.id.chatList_recylerView);
         registerForContextMenu(recyclerView);
-        addNewChat = findViewById(R.id.add_new_chat);
-        deletechat = findViewById(R.id.delete_chatroom);
-        swipeRefreshLayout = findViewById(R.id.chat_list_swipe_refresh);
-        selectDeselect = findViewById(R.id.chatlist_select_deselect);
-        noChatsToShowView = findViewById(R.id.no_chats_to_show_txt);
+        addNewChat = view.findViewById(R.id.add_new_chat);
+        deletechat = view.findViewById(R.id.delete_chatroom);
+        swipeRefreshLayout = view.findViewById(R.id.chat_list_swipe_refresh);
+        selectDeselect = view.findViewById(R.id.chatlist_select_deselect);
+        noChatsToShowView = view.findViewById(R.id.no_chats_to_show_txt);
         params = (ConstraintLayout.LayoutParams) addNewChat.getLayoutParams();
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         chatListAdapter = new ChatListAdapter(chatroomList, this);
         recyclerView.setAdapter(chatListAdapter);
@@ -148,19 +140,7 @@ public class ChatListActivity extends AppCompatActivity implements ChatListClick
         }
 
         public List<Contact> getChatList () {
-            ArrayList<Contact> chatList = new ArrayList<Contact>();
-            if (XMPPConnection.mConnection != null) {
-                Roster roster = Roster.getInstanceFor(XMPPConnection.mConnection);
-                Collection<RosterEntry> entries = roster.getEntries();
-                for (RosterEntry entry : entries) {
-                    chatList.add(new Contact(entry.getName(),0));
-                }
-
-
-
-
-            }
-            return chatList;
+            return XmppCore.getInstance().getContactsListForCurrentUser();
         }
 
 
@@ -199,10 +179,10 @@ public class ChatListActivity extends AppCompatActivity implements ChatListClick
         setIsDeleteMode(true);
         deletechat.setVisibility(View.VISIBLE);
         selectDeselect.setVisibility(View.VISIBLE);
-        selectDeselect.setImageDrawable(getResources().getDrawable(R.drawable.select_all, getApplication().getTheme()));
+        selectDeselect.setImageDrawable(getResources().getDrawable(R.drawable.select_all, getActivity().getApplication().getTheme()));
     }
 
-    private void removeChatsConversation(List<Contact> rooms) {
+//    private void removeChatsConversation(List<Contact> rooms) {
 //        if (rooms.size() == 0) {
 //            Toast.makeText(this, "No items selected", Toast.LENGTH_SHORT).show();
 //            chatListAdapter.getOutOfDeleteMode();
@@ -217,16 +197,16 @@ public class ChatListActivity extends AppCompatActivity implements ChatListClick
 //                }
 //            }
 //            Toast.makeText(getContext(), "Chatrooms deleted successfully", Toast.LENGTH_SHORT).show();
-//            MainActivity.getInstance().updateMissedChatCount();
+//            ChatActivity.getInstance().updateMissedChatCount();
 //            refresh();
 //        }
-    }
+//    }
 
     public void change(int i, Context context) {
         int size = 0;
         TypedValue tv = new TypedValue();
         try {
-            if (getApplication().getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
+            if (getActivity().getApplication().getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
                 size = TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
             }
         } catch (Exception e) {
@@ -238,10 +218,6 @@ public class ChatListActivity extends AppCompatActivity implements ChatListClick
         deletechat.setLayoutParams(params);
 
     }
-
-
-
-
 
     @Override
     public void onResume() {
@@ -256,7 +232,7 @@ public class ChatListActivity extends AppCompatActivity implements ChatListClick
 
     @Override
     public void onItemClick(int position) {
-        Intent i = new Intent(this,MainActivity.class);
+        Intent i = new Intent(getActivity(), ChatActivity.class);
         i.putExtra("username",chatListAdapter.getItem(position).getName());
         startActivity(i);
         refresh();
