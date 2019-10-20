@@ -2,26 +2,38 @@ package com.example.jasper.AppBackend.Xmpp;
 
 import android.util.Log;
 
+import com.example.jasper.AppBackend.Interfaces.CustomFileTransferListener;
 import com.example.jasper.AppBackend.Interfaces.XMPPCore;
+import com.example.jasper.AppBackend.Presistance.DBHelper;
+import com.example.jasper.Constants;
 import com.example.jasper.Models.Contact;
-import com.example.jasper.Models.MessageModel;
 
 import org.jivesoftware.smack.AbstractXMPPConnection;
-import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.chat2.Chat;
 import org.jivesoftware.smack.chat2.ChatManager;
+import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.roster.Roster;
 import org.jivesoftware.smack.roster.RosterEntry;
+import org.jivesoftware.smack.roster.RosterListener;
+import org.jivesoftware.smackx.filetransfer.FileTransferManager;
+import org.jivesoftware.smackx.filetransfer.OutgoingFileTransfer;
 import org.jxmpp.jid.EntityBareJid;
+import org.jxmpp.jid.EntityFullJid;
+import org.jxmpp.jid.Jid;
 import org.jxmpp.jid.impl.JidCreate;
 import org.jxmpp.stringprep.XmppStringprepException;
+import org.jxmpp.util.XmppStringUtils;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class XmppCore implements XMPPCore {
+    private static final String TAG = "XmppCore";
     private static XmppCore instance;
     private AbstractXMPPConnection mConnection;
 
@@ -69,6 +81,33 @@ public class XmppCore implements XMPPCore {
         return chatList;
     }
 
+
+    public void initialzeRoasterListener(){
+        Roster roster = Roster.getInstanceFor(mConnection);
+        roster.addRosterListener(new RosterListener() {
+            @Override
+            public void entriesAdded(Collection<Jid> addresses) {
+
+            }
+
+            @Override
+            public void entriesUpdated(Collection<Jid> addresses) {
+
+            }
+
+            @Override
+            public void entriesDeleted(Collection<Jid> addresses) {
+
+            }
+
+            @Override
+            public void presenceChanged(Presence presence) {
+                Log.i("XmppCore", "Presence Changed");
+                Constants.resource = presence.getFrom().getResourceOrEmpty().toString();
+            }
+        });
+    }
+
     @Override
     public boolean sendMessage(String messageToSend, String entityBareId) {
         EntityBareJid jid = null;
@@ -111,5 +150,51 @@ public class XmppCore implements XMPPCore {
         catch (Exception e){
 
         }
+    }
+
+    @Override
+    public void sendFile(final String username, final String pathName, String desc, final String res, CustomFileTransferListener listener) {
+//        if (!mConnection.isConnected()){
+//            Log.i("XmppCore", "Connection was not established");
+//            try {
+//                Log.i("XmppCore", "Trying to reconnect");
+//                mConnection.connect();
+//                mConnection.login();
+//            }
+//            catch (Exception e){
+//                Log.i("XmppCore", "Error while reconnecting:" + e.toString());
+//            }
+//        }
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                FileTransferManager manager = FileTransferManager.getInstanceFor(mConnection);
+                try {
+                    EntityFullJid i = JidCreate.entityFullFrom(XmppStringUtils.completeJidFrom(username, Constants.domain, res));
+                    Log.i("XmppCore","jid = "+ i.toString());
+                    OutgoingFileTransfer oft = manager.createOutgoingFileTransfer(i);
+                    File f = new File(pathName);
+                    Log.i("XmppCore", "file Size = "+ f.length());
+                    FileInputStream stream = new FileInputStream(f);
+                    oft.sendStream(stream, f.getAbsolutePath(),f.length(), "A greeting");
+                    outerloop:
+                    while (!oft.isDone()) {
+                        switch (oft.getStatus()) {
+                            case error:
+                                Log.i("XmppCore", "sendFile: "+ oft.getError());
+                                break outerloop;
+                            default:
+                                Log.i("XmppCore","Filetransfer status: " + oft.getStatus() + ". Progress: " + oft.getProgress());
+                                break;
+                        }
+                    }
+                    Log.i("XmppCore","Filetransfer done " + oft.getStatus() + ". Progress: " + oft.getProgress() + ". Error " + oft.getError() + ". Exception" + oft.getException());
+                }
+                catch (Exception e){
+                    Log.i("XmppCore", "sendFile: "+ e.toString());
+                }
+            }
+        });
+        thread.start();
     }
 }

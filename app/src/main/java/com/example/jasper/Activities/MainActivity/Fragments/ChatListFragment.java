@@ -1,11 +1,15 @@
 package com.example.jasper.Activities.MainActivity.Fragments;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
 import com.example.jasper.Activities.Chat.ChatActivity;
+import com.example.jasper.Activities.MainActivity.AddChatDialog;
 import com.example.jasper.Adapters.ChatListAdapter;
 import com.example.jasper.AppBackend.Xmpp.XmppCore;
 import com.example.jasper.Interfaces.ChatListClickListener;
@@ -107,15 +111,15 @@ public class ChatListFragment extends Fragment implements ChatListClickListener{
             }
         });
 
-//        addNewChat.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //startActivity(new Intent(getContext(), ChatActivity.class));
-//                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-//                intent.putExtra("intentPurpose", "addnewchat");
-//                startActivity(intent);
-//            }
-//        });
+        addNewChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddChatDialog dialog = new AddChatDialog(getActivity());
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                dialog.show();
+            }
+        });
 
 
 //        selectDeselect.setOnClickListener(new View.OnClickListener() {

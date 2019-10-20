@@ -50,28 +50,6 @@
         android:padding="8dp"
         android:visibility="invisible">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <at.markushi.ui.CircleButton
-                android:id="@+id/open_camera"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:src="@drawable/ic_camera_alt_black_24dp"
-                app:cb_color="@color/chatActivityOpenCameraButtonColor" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Camera"
-                android:textColor="@color/fullwhite" />
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -2,27 +2,35 @@ package com.example.jasper.Adapters;
 
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -30,9 +38,11 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.jasper.Activities.ImageDetailActivity;
+import com.example.jasper.Activities.MainActivity.MainActivity;
 import com.example.jasper.Models.MessageModel;
 import com.example.jasper.Activities.Chat.ChatActivity;
 import com.example.jasper.R;
+import com.example.jasper.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -460,6 +470,113 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             handleIfImageMessage(holder, message, type, position);
         } else if (message.getMsgType().equals("location")) {
             handleIfLocationMessage(holder, message, type, position);
+        } else if (message.getMsgType().equals("file")){
+            handleIfFileMesage(holder,message,type,position);
+        }
+    }
+
+
+    private void handleIfFileMesage(final RecyclerView.ViewHolder holder, final MessageModel message, String type, final int position){
+        if (type.equals("sent")) {
+            final String tempPath = message.getMessages().replace("##file##","");
+            String fileName = Utils.getFileNameFromPath(tempPath);
+            ((SentMessageViewHolder) holder).sentImageMsgParentLayout.setVisibility(GONE);
+            ((SentMessageViewHolder) holder).sentLocationMsgParentLayout.setVisibility(GONE);
+            ((SentMessageViewHolder) holder).sentTextMsgParentLayout.setVisibility(VISIBLE);
+
+            String mystring=new String(fileName);
+            SpannableString content = new SpannableString(mystring);
+            content.setSpan(new UnderlineSpan(), 0, mystring.length(), 0);
+            ((SentMessageViewHolder) holder).sentTextMsgBody.setText(content);
+            ((SentMessageViewHolder) holder).sentTextMsgBody.setTextColor(Color.BLUE);
+            ((SentMessageViewHolder) holder).sentTextMsgBody.setTextSize(20);
+
+            if (message.getSelected()) {
+                ((SentMessageViewHolder) holder).sentMsgHideAbleView.setVisibility(VISIBLE);
+
+            } else {
+                ((SentMessageViewHolder) holder).sentMsgHideAbleView.setVisibility(GONE);
+            }
+
+
+            ((SentMessageViewHolder) holder).sentTextMsgBody.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("SyntheticAccessor")
+                @Override
+                public void onClick(View v) {
+                    if (!isDeleteModeOn) {
+                        ChatActivity.getInstance().openFileViewer(tempPath);
+                    } else {
+                        if (!message.getSelected()) {
+                            showNewAdapterLogs("Mode was ON onClick. and message was not selected.");
+                            addMessageToDeleteList(message, position);
+                        } else {
+                            showNewAdapterLogs("Mode was ON onClick. and message was selected.so removing...");
+                            removeMessageFromDeleteList(message, position);
+                        }
+                    }
+
+                }
+            });
+
+            ((SentMessageViewHolder) holder).sentMsgHideAbleView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (message.getSelected() && isDeleteModeOn && ((SentMessageViewHolder) holder).sentMsgHideAbleView.getVisibility() == VISIBLE) {
+                        removeMessageFromDeleteList(message, position);
+                    }
+                }
+            });
+
+        } else if (type.equals("received")) {
+            String tempPath = message.getMessages().replace("##file##","");
+            String[] splits = tempPath.split("/");
+            final String path = Environment.getExternalStorageDirectory() + "/Jasper/"+splits[splits.length -1];
+            String fileName = Utils.getFileNameFromPath(tempPath);
+
+            String mystring=new String(fileName);
+            SpannableString content = new SpannableString(mystring);
+            content.setSpan(new UnderlineSpan(), 0, mystring.length(), 0);
+
+            ((ReceivedMessageViewHolder) holder).receivedImageMsgParentLayout.setVisibility(GONE);
+            ((ReceivedMessageViewHolder) holder).receivedLocationMsgParentLayout.setVisibility(GONE);
+            ((ReceivedMessageViewHolder) holder).receivedTextMsgParentLayout.setVisibility(VISIBLE);
+
+            ((ReceivedMessageViewHolder) holder).receivedTextMsgBody.setText(content);
+            ((ReceivedMessageViewHolder) holder).receivedTextMsgBody.setTextColor(Color.BLUE);
+            ((ReceivedMessageViewHolder) holder).receivedTextMsgBody.setTextSize(20);
+
+
+            if (message.getSelected()) {
+                ((ReceivedMessageViewHolder) holder).receivedMsgHideAbleView.setVisibility(View.VISIBLE);
+            } else {
+                ((ReceivedMessageViewHolder) holder).receivedMsgHideAbleView.setVisibility(GONE);
+            }
+
+            ((ReceivedMessageViewHolder) holder).receivedTextMsgBody.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!isDeleteModeOn) {
+                        ChatActivity.getInstance().openFileViewer(path);
+                    } else {
+                        if (!message.getSelected()) {
+                            showNewAdapterLogs("Mode was ON onClick. and message was not selected.");
+                            addMessageToDeleteList(message, position);
+                        } else {
+                            showNewAdapterLogs("Mode was ON onClick. and message was selected.so removing...");
+                            removeMessageFromDeleteList(message, position);
+                        }
+                    }
+
+                }
+            });
+            ((ReceivedMessageViewHolder) holder).receivedMsgHideAbleView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (message.getSelected() && isDeleteModeOn && ((ReceivedMessageViewHolder) holder).receivedMsgHideAbleView.getVisibility() == VISIBLE) {
+                        removeMessageFromDeleteList(message, position);
+                    }
+                }
+            });
         } else {
             // Do nothing...
         }
@@ -539,7 +656,6 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
                 }
             });
-
             ((ReceivedMessageViewHolder) holder).receivedMsgHideAbleView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -548,11 +664,9 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
                 }
             });
-
         } else {
             // Do nothing...
         }
-
     }
 
     private void handleProgress(final RecyclerView.ViewHolder holder, final MessageModel message, final int position, String type) {
@@ -593,7 +707,6 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         String msgText = message.getMessages();
         // Outgoing Image Message.
         if (type.equals("sent")) {
-
             ((SentMessageViewHolder) holder).sentMsgHideAbleView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -608,107 +721,51 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             } else {
                 ((SentMessageViewHolder) holder).sentMsgHideAbleView.setVisibility(GONE);
             }
-
             String sentPath = null;
-            if (msgText.contains("#image#memory*-*")) {
-                sentPath = msgText.replace("#image#memory*-*", "");
-                ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(VISIBLE);
-                Glide.with(((SentMessageViewHolder) holder).itemView)
-                        .load(sentPath)
-                        .centerCrop()
-                        .listener(new RequestListener<Drawable>() {
-                            @Override
-                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
-                                return false;
-                            }
+            sentPath = msgText.replace("##image##", "");
+            ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(VISIBLE);
+            Glide.with(((SentMessageViewHolder) holder).itemView)
+                    .load(sentPath)
+                    .centerCrop()
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
+                            return false;
+                        }
 
-                            @Override
-                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
-                                return false;
-                            }
-                        })
-                        .placeholder(R.drawable.ic_photo_size_select_actual_black_24dp)
-                        .into(((SentMessageViewHolder) holder).sentImageMsgPicture);
-                ((SentMessageViewHolder) holder).sentImageMsgParentLayout.setVisibility(VISIBLE);
-                ((SentMessageViewHolder) holder).sentLocationMsgParentLayout.setVisibility(GONE);
-                ((SentMessageViewHolder) holder).sentTextMsgParentLayout.setVisibility(GONE);
-
-
-                String status = message.getImageMsgStatus();
-                if (status != null) {
-                    Log.d("imagedownloadprogress", "Status of " + position + " is: " + status);
-                    Log.i("imageUploadTest", "uploadImage: status " + status);
-                    if (status.equals("uploading")) {
-                        //((SentMessageViewHolder) holder).sentImgMsgProgress.setAttributeResourceId(R.drawable.ic_close_black_24dp);
-                        ((SentMessageViewHolder) holder).imgProgressActionBtn.setImageResource(R.drawable.ic_close_black_24dp);
-                        ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(VISIBLE);
-                    } else if (status.equals("uploadable")) {
-                        //((SentMessageViewHolder) holder).sentImgMsgProgress.setAttributeResourceId(R.drawable.ic_file_upload_black_24dp);
-                        ((SentMessageViewHolder) holder).imgProgressActionBtn.setImageResource(R.drawable.ic_file_upload_black_24dp);
-                        ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
-                    } else if (status.equals("uploaded")) {
-                        ((SentMessageViewHolder) holder).imgProgressActionBtn.setVisibility(GONE);
-                        ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
-                    } else {
-                        ((SentMessageViewHolder) holder).imgProgressActionBtn.setVisibility(GONE);
-                        ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
-                    }
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
+                            return false;
+                        }
+                    })
+                    .placeholder(R.drawable.ic_photo_size_select_actual_black_24dp)
+                    .into(((SentMessageViewHolder) holder).sentImageMsgPicture);
+            ((SentMessageViewHolder) holder).sentImageMsgParentLayout.setVisibility(VISIBLE);
+            ((SentMessageViewHolder) holder).sentLocationMsgParentLayout.setVisibility(GONE);
+            ((SentMessageViewHolder) holder).sentTextMsgParentLayout.setVisibility(GONE);
+            String status = message.getImageMsgStatus();
+            if (status != null) {
+                Log.d("imagedownloadprogress", "Status of " + position + " is: " + status);
+                Log.i("imageUploadTest", "uploadImage: status " + status);
+                if (status.equals("uploading")) {
+                    //((SentMessageViewHolder) holder).sentImgMsgProgress.setAttributeResourceId(R.drawable.ic_close_black_24dp);
+                    ((SentMessageViewHolder) holder).imgProgressActionBtn.setImageResource(R.drawable.ic_close_black_24dp);
+                    ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(VISIBLE);
+                } else if (status.equals("uploadable")) {
+                    //((SentMessageViewHolder) holder).sentImgMsgProgress.setAttributeResourceId(R.drawable.ic_file_upload_black_24dp);
+                    ((SentMessageViewHolder) holder).imgProgressActionBtn.setImageResource(R.drawable.ic_file_upload_black_24dp);
+                    ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
+                } else if (status.equals("uploaded")) {
+                    ((SentMessageViewHolder) holder).imgProgressActionBtn.setVisibility(GONE);
+                    ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
                 } else {
-                    Log.i("imageUploadTest", "uploadImage: status " + status);
+                    ((SentMessageViewHolder) holder).imgProgressActionBtn.setVisibility(GONE);
+                    ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
                 }
-
-            }
-            if (msgText.contains("#image#server*-*")) {
-                sentPath = msgText.replace("#image#server*-*", "");
-                final String path = msgText.replace("#image#server*-*", "");
-                ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(VISIBLE);
-                ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setBackgroundResource(R.drawable.progress_btn_background);
-                ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(holder.itemView.getContext(), R.color.lesserwhite)));
-                ((SentMessageViewHolder) holder).sentImageMsgParentLayout.setVisibility(VISIBLE);
-                ((SentMessageViewHolder) holder).sentLocationMsgParentLayout.setVisibility(GONE);
-                ((SentMessageViewHolder) holder).sentTextMsgParentLayout.setVisibility(GONE);
-                ((SentMessageViewHolder) holder).imgProgressActionBtn.setVisibility(GONE);
-                File file = ChatActivity.getInstance().loadImageInMemory(path);
-                if (file != null) {
-                    Glide.with(((SentMessageViewHolder) holder).itemView)
-                            .load(file)
-                            .centerCrop()
-                            .listener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
-                                    return false;
-                                }
-
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                    ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
-                                    return false;
-                                }
-                            })
-                            .placeholder(R.drawable.ic_photo_size_select_actual_black_24dp)
-                            .into(((SentMessageViewHolder) holder).sentImageMsgPicture);
-                } else {
-                    Glide.with(((SentMessageViewHolder) holder).itemView).load(path)
-                            .listener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
-                                    return false;
-                                }
-
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                    ((SentMessageViewHolder) holder).sentImgMsgProgressBar.setVisibility(GONE);
-                                    ChatActivity.getInstance().saveImageInBitmap(path, ((BitmapDrawable) resource).getBitmap());
-                                    return false;
-                                }
-                            }).centerCrop()
-                            .placeholder(R.drawable.ic_photo_size_select_actual_black_24dp)
-                            .into(((SentMessageViewHolder) holder).sentImageMsgPicture);
-                }
+            } else {
+                Log.i("imageUploadTest", "uploadImage: status " + status);
             }
             final String finalSentPath = sentPath;
             ((SentMessageViewHolder) holder).sentImageMsgPicture.setOnClickListener(new View.OnClickListener() {
@@ -746,79 +803,78 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
                 }
             });
-
-            if (msgText.contains("#image#server*-*")) {
-                ((ReceivedMessageViewHolder) holder).receivedImgMsgProgress.setVisibility(VISIBLE);
-                Log.i("imageUploadTest", "server message");
-                final String path = msgText.replace("#image#server*-*", "");
-                ((ReceivedMessageViewHolder) holder).receivedImageMsgParentLayout.setVisibility(VISIBLE);
-                ((ReceivedMessageViewHolder) holder).receivedLocationMsgParentLayout.setVisibility(GONE);
-                ((ReceivedMessageViewHolder) holder).receivedTextMsgParentLayout.setVisibility(GONE);
-                File file = ChatActivity.getInstance().loadImageInMemory(path);
-                if (file != null) {
-                    Glide.with(((ReceivedMessageViewHolder) holder).itemView)
-                            .load(file)
-                            .listener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    ((ReceivedMessageViewHolder) holder).receivedImgMsgProgress.setVisibility(GONE);
-                                    return false;
-                                }
-
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                    ((ReceivedMessageViewHolder) holder).receivedImgMsgProgress.setVisibility(GONE);
-                                    return false;
-                                }
-                            }).centerCrop()
-                            .placeholder(R.drawable.ic_photo_size_select_actual_black_24dp)
-                            .into(((ReceivedMessageViewHolder) holder).receivedImageMsgPicture);
-                } else {
-                    Glide.with(((ReceivedMessageViewHolder) holder).itemView).load(path).listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            ((ReceivedMessageViewHolder) holder).receivedImgMsgProgress.setVisibility(GONE);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            ((ReceivedMessageViewHolder) holder).receivedImgMsgProgress.setVisibility(GONE);
-                            ChatActivity.getInstance().saveImageInBitmap(path, ((BitmapDrawable) resource).getBitmap());
-                            return false;
-                        }
-                    }).centerCrop()
-                            .placeholder(R.drawable.ic_photo_size_select_actual_black_24dp)
-                            .into(((ReceivedMessageViewHolder) holder).receivedImageMsgPicture);
-
-                }
-
-                final String finalSentPath = path;
-                ((ReceivedMessageViewHolder) holder).receivedImageMsgPicture.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (!isDeleteModeOn) {
-                            Log.d("imagepath", "onClick: Image Path is: " + finalSentPath);
-                            Intent intent = new Intent(holder.itemView.getContext(), ImageDetailActivity.class);
-                            intent.putExtra("path", finalSentPath);
-                            holder.itemView.getContext().startActivity(intent);
-                        } else {
-                            if (!message.getSelected()) {
-                                showNewAdapterLogs("Mode was ON onClick. and message was not selected.");
-                                addMessageToDeleteList(message, position);
-                            } else {
-                                showNewAdapterLogs("Mode was ON onClick. and message was selected. so removing...");
-                                removeMessageFromDeleteList(message, position);
+            ((ReceivedMessageViewHolder) holder).receivedImgMsgProgress.setVisibility(VISIBLE);
+            Log.i("imageUploadTest", "server message");
+            String path2 = msgText.replace("##image##", "");
+            String[] splits = path2.split("/");
+            final String path = Environment.getExternalStorageDirectory() + "/Jasper/"+splits[splits.length -1];
+            ((ReceivedMessageViewHolder) holder).receivedImageMsgParentLayout.setVisibility(VISIBLE);
+            ((ReceivedMessageViewHolder) holder).receivedLocationMsgParentLayout.setVisibility(GONE);
+            ((ReceivedMessageViewHolder) holder).receivedTextMsgParentLayout.setVisibility(GONE);
+            File file = ChatActivity.getInstance().loadImageInMemory(path);
+            if (file != null) {
+                Glide.with(((ReceivedMessageViewHolder) holder).itemView)
+                        .load(file)
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                ((ReceivedMessageViewHolder) holder).receivedImgMsgProgress.setVisibility(GONE);
+                                return false;
                             }
-                        }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                ((ReceivedMessageViewHolder) holder).receivedImgMsgProgress.setVisibility(GONE);
+                                return false;
+                            }
+                        }).centerCrop()
+                        .placeholder(R.drawable.ic_photo_size_select_actual_black_24dp)
+                        .into(((ReceivedMessageViewHolder) holder).receivedImageMsgPicture);
+            } else {
+                Glide.with(((ReceivedMessageViewHolder) holder).itemView).load(path).listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        ((ReceivedMessageViewHolder) holder).receivedImgMsgProgress.setVisibility(GONE);
+                        return false;
                     }
-                });
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        ((ReceivedMessageViewHolder) holder).receivedImgMsgProgress.setVisibility(GONE);
+                        ChatActivity.getInstance().saveImageInBitmap(path, ((BitmapDrawable) resource).getBitmap());
+                        return false;
+                    }
+                }).centerCrop()
+                        .placeholder(R.drawable.ic_photo_size_select_actual_black_24dp)
+                        .into(((ReceivedMessageViewHolder) holder).receivedImageMsgPicture);
 
             }
+
+            final String finalSentPath = path;
+            ((ReceivedMessageViewHolder) holder).receivedImageMsgPicture.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!isDeleteModeOn) {
+                        Log.d("imagepath", "onClick: Image Path is: " + finalSentPath);
+                        Intent intent = new Intent(holder.itemView.getContext(), ImageDetailActivity.class);
+                        intent.putExtra("path", finalSentPath);
+                        holder.itemView.getContext().startActivity(intent);
+                    } else {
+                        if (!message.getSelected()) {
+                            showNewAdapterLogs("Mode was ON onClick. and message was not selected.");
+                            addMessageToDeleteList(message, position);
+                        } else {
+                            showNewAdapterLogs("Mode was ON onClick. and message was selected. so removing...");
+                            removeMessageFromDeleteList(message, position);
+                        }
+                    }
+                }
+            });
         }
     }
 
     private void handleIfLocationMessage(final RecyclerView.ViewHolder holder, final MessageModel message, String type, final int position) {
+        Log.i("LocTest","setting view for loc");
         if (type.equals("sent")) {
             ((SentMessageViewHolder) holder).sentImageMsgParentLayout.setVisibility(GONE);
             ((SentMessageViewHolder) holder).sentLocationMsgParentLayout.setVisibility(VISIBLE);
@@ -840,27 +896,16 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             });
 
 
-            String[] parsedData = message.getMessages().split("#");
-            final String cordinated = parsedData[1];
+
+            final String cordinated = message.getMessages().substring(message.getMessages().lastIndexOf("#")+1);
             ((SentMessageViewHolder) holder).sentLocationMsgPicture.setVisibility(VISIBLE);
-
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        final Bitmap image = ChatActivity.getInstance().getLocationImage(cordinated);
-                        Glide.with(((SentMessageViewHolder) holder).itemView).load(image).centerCrop().placeholder(R.drawable.ic_photo_size_select_actual_black_24dp).into(((SentMessageViewHolder) holder).sentLocationMsgPicture);
-                    } catch (Exception i) {
-                        System.out.print(i.getMessage());
-                    }
-
-                }
-            }).start();
+            Log.i("LocTest","coordinates = " + cordinated);
 
             ((SentMessageViewHolder) holder).sentLocationMsgPicture.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (!isDeleteModeOn) {
+                        Log.i("LocTest","Clicking");
                         Uri gmmIntentUri = Uri.parse("geo:" + cordinated + "?q=" + cordinated);
                         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                         mapIntent.setPackage("com.google.android.apps.maps");
@@ -869,6 +914,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         }
                     } else {
                         if (!message.getSelected()) {
+                            Log.i("LocTest","opening");
                             showNewAdapterLogs("Mode was ON onClick. and message was not selected.");
                             addMessageToDeleteList(message, position);
                         } else {
@@ -898,27 +944,15 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 }
             });
 
-            String[] parsedData = message.getMessages().split("#");
-            final String cordinated = parsedData[1];
+            final String cordinated = message.getMessages().substring(message.getMessages().lastIndexOf("#")+1);
             ((ReceivedMessageViewHolder) holder).receivedLocationMsgPicture.setVisibility(VISIBLE);
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        final Bitmap image = ChatActivity.getInstance().getLocationImage(cordinated);
-                        Glide.with(((ReceivedMessageViewHolder) holder).itemView).load(image).centerCrop().placeholder(R.drawable.ic_photo_size_select_actual_black_24dp).into(((ReceivedMessageViewHolder) holder).receivedLocationMsgPicture);
-                    } catch (Exception i) {
-                        System.out.print(i.getMessage());
-                    }
-
-                }
-            }).start();
 
             ((ReceivedMessageViewHolder) holder).receivedLocationMsgPicture.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (!isDeleteModeOn) {
+                        Log.i("LocTest","Clicking");
                         Uri gmmIntentUri = Uri.parse("geo:" + cordinated + "?q=" + cordinated);
                         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                         mapIntent.setPackage("com.google.android.apps.maps");

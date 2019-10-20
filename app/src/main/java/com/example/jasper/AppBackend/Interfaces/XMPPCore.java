@@ -5,7 +5,8 @@ import com.example.jasper.Models.Contact;
 import java.util.List;
 
 public interface XMPPCore{
-    public List<Contact> getContactsListForCurrentUser();
-    public boolean sendMessage(String messageToSend,String entityBareId);
-    public void reLogin();
+    List<Contact> getContactsListForCurrentUser();
+    boolean sendMessage(String messageToSend,String entityBareId);
+    void reLogin();
+    void sendFile(String jid, String filepath, String desc,String des, CustomFileTransferListener listener);
 }

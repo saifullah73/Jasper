@@ -65,7 +65,6 @@ public class ImageDetailActivity extends AppCompatActivity {
                 updateView();
             }
         });
-
         Glide.with(this).load(path).placeholder(R.drawable.ic_photo_size_select_actual_black_24dp).into(photoView);
     }
 

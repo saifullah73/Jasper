@@ -1,6 +1,7 @@
 package com.example.jasper.AppBackend.Xmpp;
 
 import com.example.jasper.Activities.Login;
+import com.example.jasper.Constants;
 
 import org.jivesoftware.smack.AbstractXMPPConnection;
 import org.jivesoftware.smack.ConnectionConfiguration;
@@ -67,6 +68,7 @@ public class XMPPConnection {
                     if(mConnection.isAuthenticated() && mConnection.isConnected()){
                         //now send message and receive message code here
                         Login.getInstance().success();
+                        Constants.currentUser = username;
                     }
 
                 } catch (SmackException e) {

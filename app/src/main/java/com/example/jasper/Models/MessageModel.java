@@ -11,11 +11,13 @@ public class MessageModel {
     private int storageId;
 
 
-    public MessageModel(String head, String mess){
-        messages = mess;
+
+
+    public MessageModel(String head,String msg, String timestamp){
+        messages = msg;
         status = "sent";
         msgType = "text";
-        date = 123;
+        date = Long.valueOf(timestamp);
         expandable = false;
         isDecorated = false;
         if(head.equals("received")){
@@ -25,8 +27,45 @@ public class MessageModel {
             isSender = true;
         }
         isSelected = false;
-        imageMsgStatus = "uploadable";
+        imageMsgStatus = "uploaded";
     }
+
+    public MessageModel(String head,String msg, String timestamp,String type){
+        messages = msg;
+        status = "sent";
+        msgType = type;
+        date = Long.valueOf(timestamp);
+        expandable = false;
+        isDecorated = false;
+        if(head.equals("received")){
+            isSender = false;
+        }
+        else{
+            isSender = true;
+        }
+        isSelected = false;
+        imageMsgStatus = "uploaded";
+    }
+
+
+    public MessageModel(String head,String msg, String timestamp,String type,String imgStatus){
+        messages = msg;
+        status = "sent";
+        msgType = type;
+        date = Long.valueOf(timestamp);
+        expandable = false;
+        isDecorated = false;
+        if(head.equals("received")){
+            isSender = false;
+        }
+        else{
+            isSender = true;
+        }
+        isSelected = false;
+        imageMsgStatus = imgStatus;
+    }
+
+
 
 
     public String getImageMsgStatus() {

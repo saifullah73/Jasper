@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
@@ -18,6 +19,7 @@ import android.provider.MediaStore;
 import android.annotation.SuppressLint;
 import android.content.*;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -37,23 +39,33 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.MimeTypeMap;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jasper.Adapters.ChatMessageAdapter;
+import com.example.jasper.AppBackend.Interfaces.CustomFileTransferListener;
+import com.example.jasper.AppBackend.Interfaces.FetchCallbackListener;
+import com.example.jasper.AppBackend.Presistance.DBHelper;
 import com.example.jasper.AppBackend.Xmpp.XmppCore;
+import com.example.jasper.Constants;
+import com.example.jasper.LocationManagerClass;
 import com.example.jasper.Models.MessageModel;
 import com.example.jasper.R;
 import com.example.jasper.AppBackend.Xmpp.XMPPConnection;
+import com.example.jasper.Utils;
 
 import org.jivesoftware.smack.SmackException;
+import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.chat2.Chat;
 import org.jivesoftware.smack.chat2.ChatManager;
 import org.jivesoftware.smack.chat2.IncomingChatMessageListener;
+import org.jivesoftware.smackx.filetransfer.FileTransferListener;
+import org.jivesoftware.smackx.filetransfer.FileTransferManager;
+import org.jivesoftware.smackx.filetransfer.FileTransferRequest;
+import org.jivesoftware.smackx.filetransfer.IncomingFileTransfer;
 import org.jxmpp.jid.EntityBareJid;
-import org.jxmpp.jid.impl.JidCreate;
-import org.jxmpp.stringprep.XmppStringprepException;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -79,7 +91,8 @@ import static android.view.View.GONE;
 public class ChatActivity extends AppCompatActivity implements ChatMessageAdapter.ChangeToolbarMenuItemsListener {
     private static final String TAG = "ChatActivity";
     private static final int ADD_PHOTO = 1337;
-    private enum MessageType {LOCATION, IMAGE, TEXT}
+    private static final int ADD_DOC = 1336;
+    public enum MessageType {LOCATION, IMAGE,FILE,TEXT}
     private static ChatActivity instance;
     //Views
     private Toolbar toolbar;
@@ -102,6 +115,7 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
     private Uri imageToUploadUri;
     private String fileSharedUri;
     private String username;
+    private boolean isActive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +123,6 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
         setContentView(R.layout.activity_chat);
         Log.i("NewImp", "here");
         initViews();
-        initListeners();
         hideKeyboard();
         initRecyclerView();
         instance = this;
@@ -123,10 +136,16 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
             initChatRoom(username);
         }
         domainName = getString(R.string.domainName);
-
         mAdapter.setInterface(this);
-
-
+        DBHelper.getInstance(getApplicationContext()).getHistory(Constants.currentUser, username, "18-10-2019", new FetchCallbackListener() {
+            @Override
+            public void onSuccess(List<MessageModel> list) {
+                Log.i("DBTest","testing for message fetch works");
+                for (MessageModel m: list) {
+                    insertMessage(m);
+                }
+            }
+        });
     }
 
     @Override
@@ -136,24 +155,7 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
         }
     }
 
-    private void initListeners(){
-        if(XmppCore.getInstance().getXmppConnection()!=null) {
-            ChatManager chatManager = ChatManager.getInstanceFor(XMPPConnection.mConnection);
-            chatManager.addListener(new IncomingChatMessageListener() {
-                @Override
-                public void newIncomingMessage(EntityBareJid from, org.jivesoftware.smack.packet.Message message, Chat chat) {
-                    Log.e(TAG, "New message from " + from + ": " + message.getBody());
-                    final MessageModel data = new MessageModel("received", message.getBody().toString());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            insertMessage(data);
-                        }
-                    });
-                }
-            });
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -373,7 +375,9 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
 //            }
 //        }
     }
-    private void insertMessage(MessageModel message) {
+
+
+    public void insertMessage(MessageModel message) {
         scrollToBottom.setVisibility(GONE);
         mMessages.add(message);
         updateAdapter();
@@ -488,10 +492,10 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
     private void initViews() {
         toolbar = findViewById(R.id.toolbar);
         insert = findViewById(R.id.insert_extra_btn);
+        sendDocument = findViewById(R.id.send_file_btn);
         extra = findViewById(R.id.extra_layout);
         sendSms = findViewById(R.id.send_sms_btn);
         editMsg = findViewById(R.id.enter_msg_edittext);
-        openCamera = findViewById(R.id.open_camera);
         sendLocaiton = findViewById(R.id.send_location_btn);
         openGallery = findViewById(R.id.open_gallery_btn);
         scrollToBottom = findViewById(R.id.scroll_to_bottom_btn);
@@ -507,6 +511,15 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
                 } else {
                     extra.setVisibility(View.INVISIBLE);
                 }
+            }
+        });
+
+        sendDocument.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                startActivityForResult(intent, ADD_DOC);
             }
         });
 
@@ -598,17 +611,17 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
             }
         });
 
-        openCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (extra.getVisibility() == View.VISIBLE) {
-                    extra.setVisibility(View.INVISIBLE);
-                }
-                String msg = editMsg.getText().toString().trim();
-                updateAdapter();
-                extra.setVisibility(View.GONE);
-            }
-        });
+//        openCamera.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (extra.getVisibility() == View.VISIBLE) {
+//                    extra.setVisibility(View.INVISIBLE);
+//                }
+//                String msg = editMsg.getText().toString().trim();
+//                updateAdapter();
+//                extra.setVisibility(View.GONE);
+//            }
+//        });
 
         sendLocaiton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -630,7 +643,7 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
 
     private void displayMessageList() {
         if (mAdapter != null) {
-            refreshHistory();
+            loadHistory();
         } else {
             mMessages = new ArrayList<>();
             mAdapter = new ChatMessageAdapter(mMessages);
@@ -654,11 +667,12 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
 
 
     private void refreshAndMarkAsRead() {
-        refreshHistory();
+        loadHistory();
         //chatRoom.markAsRead();
     }
 
-    public void refreshHistory() {
+    public void loadHistory() {
+
 //        if (mMessages == null || chatRoom == null) return;
 //        mMessages.clear();
 //        SygnalChatMessage[] messages = chatRoom.getHistory();
@@ -667,11 +681,44 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
 //        mAdapter.notifyDataSetChanged();
     }
 
+    public String getTimestamp(){
+        return String.valueOf(System.currentTimeMillis());
+    }
+
 
     private void sendTextMessage() {
         sendTextMessage(editMsg.getText().toString(),MessageType.TEXT,username+"@"+domainName);
         editMsg.setText("");
         refreshAndMarkAsRead();
+    }
+
+
+    private void sendTextMessage(String messageToSend,MessageType type, String entityBareId,String fileStatus) {
+        String msgType;
+        switch (type) {
+            case TEXT:
+                msgType = "text";
+                break;
+            case IMAGE:
+                msgType = "image";
+                break;
+            case LOCATION:
+                msgType = "location";
+                break;
+            case FILE:
+                msgType = "file";
+                break;
+            default:
+                msgType = "text";
+        }
+
+        if (XmppCore.getInstance().sendMessage(messageToSend, entityBareId)) {
+            MessageModel data = new MessageModel("sent", messageToSend, getTimestamp(), msgType, fileStatus);
+            DBHelper.getInstance(getApplicationContext()).putMessageInDB(username, Constants.currentUser, getTimestamp(), messageToSend);
+            insertMessage(data);
+        } else {
+            Toast.makeText(getApplicationContext(), "Error sending message", Toast.LENGTH_SHORT);
+        }
     }
 
     private void sendTextMessage(String messageToSend,MessageType type, String entityBareId) {
@@ -686,13 +733,17 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
             case LOCATION:
                 msgType = "location";
                 break;
+            case FILE:
+                msgType = "file";
+                break;
             default:
                 msgType = "text";
         }
 
         if (XmppCore.getInstance().sendMessage(messageToSend,entityBareId)){
-            MessageModel data = new MessageModel("send",messageToSend);
-            insertMessage(new MessageModel("send",messageToSend));
+            MessageModel data = new MessageModel("sent",messageToSend,getTimestamp(),msgType);
+            DBHelper.getInstance(getApplicationContext()).putMessageInDB(username,Constants.currentUser,getTimestamp(),messageToSend);
+            insertMessage(data);
         }
         else{
             Toast.makeText(getApplicationContext(),"Error sending message",Toast.LENGTH_SHORT);
@@ -738,18 +789,8 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
 
 
 
-    public void resendMessage(MessageModel message) {
-//        message.getParentMessage().reSend();
-//        refreshAndMarkAsRead();
-    }
 
 
-    public Bitmap getLocationImage(String coordinates) {
-//        LocationManagerClass lc = new LocationManagerClass(this);
-//        Bitmap image = lc.getImageFromLocation(coordinates);
-//        return image;
-        return null;
-    }
 
 
 
@@ -800,16 +841,9 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
         imageToUploadUri = Uri.fromFile(file);
         captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageToUploadUri);
         cameraIntents.add(captureIntent);
-
         Intent galleryIntent = new Intent();
         galleryIntent.setType("image/*");
         galleryIntent.setAction(Intent.ACTION_PICK);
-
-        Intent fileIntent = new Intent();
-        fileIntent.setType("*/*");
-        fileIntent.setAction(Intent.ACTION_GET_CONTENT);
-        cameraIntents.add(fileIntent);
-
         Intent chooserIntent = Intent.createChooser(galleryIntent, getString(R.string.image_picker_title));
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, cameraIntents.toArray(new Parcelable[]{}));
         startActivityForResult(chooserIntent, ADD_PHOTO);
@@ -1313,17 +1347,17 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
 //    }
 
     public File loadImageInMemory(String url) {
-        final String appDirectoryName = "Sygnal";
-        String[] filename = url.split("/file/");
-        if(filename.length > 1) {
-            String filenamedata = filename[1];
-            File imageRoot = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES+"/Sygnal/");
-            //String path = Environment.getExternalStorageDirectory().toString();
-            File dir = new File(imageRoot, filenamedata);
-            if (dir.exists()) {
-                return dir;
-            }
-        }
+//        final String appDirectoryName = "Sygnal";
+//        String[] filename = url.split("/file/");
+//        if(filename.length > 1) {
+//            String filenamedata = filename[1];
+//            File imageRoot = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES+"/Sygnal/");
+//            //String path = Environment.getExternalStorageDirectory().toString();
+//            File dir = new File(imageRoot, filenamedata);
+//            if (dir.exists()) {
+//                return dir;
+//            }
+//        }
         return null;
     }
     public boolean saveImageInBitmap(String url,Bitmap image){
@@ -1389,15 +1423,15 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
     }
 
     public void ShareLocation(){
-//        LocationManagerClass Loc = new LocationManagerClass(this);
-//        Location location = Loc.getLocation();
-//        // Making Protocol to send the currentLocation
-//        if(location == null) {
-//            Toast.makeText(this,"Activate Location Setting",Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        String Protocol = "data*latlon#"+location.getLatitude()+","+location.getLongitude();
-//        sendTextMessage(Protocol,MessageType.LOCATION);
+        LocationManagerClass Loc = new LocationManagerClass(this);
+        Location location = Loc.getLocation();
+        // Making Protocol to send the currentLocation
+        if(location == null) {
+            Toast.makeText(this,"Permission Required",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String Protocol = "##location##"+location.getLatitude()+","+location.getLongitude();
+        sendTextMessage(Protocol,MessageType.LOCATION,username+"@"+Constants.domain);
     }
 
     public Uri getCVSPathFromLookupUri(Uri contentUri) {
@@ -1418,49 +1452,138 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
         return null;
     }
 
+    private CustomFileTransferListener ff = new CustomFileTransferListener() {
+        @Override
+        public void onFailure() {
 
-    //    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        showChatActivityLogs("Entering onActivityResult()");
-//        if (data != null) {
-//            if (requestCode == ADD_PHOTO && resultCode == Activity.RESULT_OK) {
-//                String fileToUploadPath = null;
-//                if (data != null && data.getData() != null) {
-//                    if (data.getData().toString().contains("com.android.contacts/contacts/")) {
-//                        if (getCVSPathFromLookupUri(data.getData()) != null)
-//                            fileToUploadPath = getCVSPathFromLookupUri(data.getData()).toString();
-//                        else {
-//                            Toast.makeText(this,"Something wrong happened", Toast.LENGTH_LONG);
-//                            return;
-//                        }
-//                    } else {
-//                        fileToUploadPath = getRealPathFromURI(data.getData());
-//                    }
-//                    if (fileToUploadPath == null) {
-//                        fileToUploadPath = data.getData().toString();
-//                    }
-//                } else if (imageToUploadUri != null) {
-//                    fileToUploadPath = imageToUploadUri.getPath();
-//                }
-//                if (SygnalUtils.isExtensionImage(fileToUploadPath)) {
-//                    if (fileToUploadPath != null) {
-//                        sendImageMessageOnServer(fileToUploadPath, 0);
-//                    }
-//                } else if (fileToUploadPath != null) {
-//                    sendFileSharingMessage(fileToUploadPath, 0);
-//                }
-//            } else {
-//                super.onActivityResult(requestCode, resultCode, data);
-//            }
-//        } else {
-//            if (SygnalUtils.isExtensionImage(imageToUploadUri.getPath()))
-//                if (imageToUploadUri.getPath() != null) {
-//                    showChatActivityLogs("Sending Image on sendImageMessageOnServer()");
-//                    showChatActivityLogs("Image path is: " + imageToUploadUri.getPath());
-//                    sendImageMessageOnServer(imageToUploadUri.getPath(), 0);
-//                }
+        }
+
+        @Override
+        public void onSuccess() {
+
+        }
+
+        @Override
+        public int getProgress() {
+            return 0;
+        }
+    };
+
+    public void openFileViewer(String path){
+//        MimeTypeMap myMime = MimeTypeMap.getSingleton();
+//        Intent newIntent = new Intent(Intent.ACTION_VIEW);
+//        String mimeType = myMime.getMimeTypeFromExtension(fileExt(tempPath).substring(1));
+//        newIntent.setDataAndType(Uri.fromFile(new File(tempPath)),mimeType);
+//        newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        try {
+//            ChatActivity.getInstance().startActivity(newIntent);
+//        } catch (ActivityNotFoundException e) {
+//            Toast.makeText(ChatActivity.getInstance(), "No handler for this type of file.", Toast.LENGTH_LONG).show();
 //        }
-//    }
+//
+//
+//
+//        MimeTypeMap myMime = MimeTypeMap.getSingleton();
+//        Intent newIntent = new Intent(Intent.ACTION_VIEW);
+//        String mimeType = myMime.getMimeTypeFromExtension(fileExt(path).substring(1));
+//        newIntent.setDataAndType(Uri.fromFile(new File(path)),mimeType);
+//        newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        try {
+//            ChatActivity.getInstance().startActivity(newIntent);
+//        } catch (ActivityNotFoundException e) {
+//            Toast.makeText(ChatActivity.getInstance(), "No handler for this type of file.", Toast.LENGTH_LONG).show();
+//        }
+
+
+
+        try{
+        MimeTypeMap myMime = MimeTypeMap.getSingleton();
+        String mimeType = myMime.getMimeTypeFromExtension(fileExt(path).substring(1));
+        File file = new File(path);
+        Intent install = new Intent(Intent.ACTION_VIEW);
+        install.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri apkURI = FileProvider.getUriForFile(getApplication(), getApplication().getApplicationContext().getPackageName() + ".provider", file);
+        install.setDataAndType(apkURI, mimeType);
+        install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(install);
+        }
+        catch (Exception e){
+            Log.i("XmppCore","error occured " +e.toString());
+        }
+    }
+
+    private String fileExt(String url) {
+        if (url.indexOf("?") > -1) {
+            url = url.substring(0, url.indexOf("?"));
+        }
+        if (url.lastIndexOf(".") == -1) {
+            return null;
+        } else {
+            String ext = url.substring(url.lastIndexOf(".") + 1);
+            if (ext.indexOf("%") > -1) {
+                ext = ext.substring(0, ext.indexOf("%"));
+            }
+            if (ext.indexOf("/") > -1) {
+                ext = ext.substring(0, ext.indexOf("/"));
+            }
+            return ext.toLowerCase();
+
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        showChatActivityLogs("Entering onActivityResult()");
+        if (data != null) {
+            if (requestCode == ADD_PHOTO && resultCode == Activity.RESULT_OK) {
+                String fileToUploadPath = null;
+                if (data != null && data.getData() != null) {
+                    showChatActivityLogs("data not null");
+                    fileToUploadPath = getRealPathFromURI(data.getData());
+                    showChatActivityLogs("filepath2 " +fileToUploadPath );
+                    sendFile(fileToUploadPath);
+                }
+            }else if(resultCode == Activity.RESULT_OK && requestCode == ADD_DOC){
+                if(data!=null && data.getData()!=null){
+                    String fileToUploadPath;
+                    Log.i("XmppCoref1","data not null" );
+                    fileToUploadPath = getRealPathFromURI(data.getData());
+                    if (fileToUploadPath == null){
+                        fileToUploadPath = Utils.getPath(getApplication(),data.getData());
+                        Log.i("XmppCoref3",fileToUploadPath );
+                    }
+                    Log.i("XmppCoref2",fileToUploadPath);
+                    sendFile(fileToUploadPath);
+                }
+                else{
+                    Log.i("XmppCoref4","data was null" );
+                }
+            }
+            else {
+                super.onActivityResult(requestCode, resultCode, data);
+            }
+        }
+    }
+
+
+
+    private void sendFile(String fileToUploadPath){
+        try {
+            XmppCore.getInstance().sendFile(username, fileToUploadPath, "file", Constants.resource, ff);
+            if (Utils.isImage(fileToUploadPath)) {
+                Log.i("FileUpload", "sendFile(): isImage = true");
+                sendTextMessage("##image##" + fileToUploadPath, MessageType.IMAGE, username + "@" + domainName, "uploaded");
+            } else {
+                Log.i("FileUpload", "sendFile(): isImage = false");
+                sendTextMessage("##file##" + fileToUploadPath, MessageType.FILE, username + "@" + domainName, "uploaded");
+            }
+        }
+        catch (Exception e){
+            Toast.makeText(getApplication(),"Error sending file",Toast.LENGTH_SHORT).show();
+            Log.e("XmppCore","File Sharing Error" + e.toString());
+        }
+    }
 
 
 

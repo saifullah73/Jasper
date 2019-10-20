@@ -18,6 +18,15 @@
         <item name="colorPrimary">#fff</item>
     </style>
 
+    <style name="imageActivityStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/mainActivityPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/mainActivityPrimaryDarkColor</item>
+        <item name="colorAccent">@color/mainActivityAccentColor</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
     <style name="mainActivityStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/mainActivityPrimaryColor</item>
         <item name="colorPrimaryDark">@color/mainActivityPrimaryDarkColor</item>
