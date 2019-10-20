@@ -19,7 +19,19 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.example.jasper.Activities.ChatListActivity" />
+        <activity android:name="com.example.jasper.Activities.Signup" />
+        <activity android:name="com.example.jasper.Activities.MainActivity.MainActivity" />
+        <activity android:name="com.example.jasper.Activities.ImageDetailActivity" />
+        <activity
+            android:name="com.example.jasper.Activities.Chat.ChatActivity"
+            android:theme="@style/chatActivityStyle" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.MainActivity.Fragments.ChatListFragment" />
+        </activity>
+        <activity
+            android:name="com.example.jasper.Activities.MainActivity.Fragments.ChatListFragment"
+            android:theme="@style/mainActivityStyle" />
         <activity android:name="com.example.jasper.Activities.Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +39,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.jasper.Activities.MainActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

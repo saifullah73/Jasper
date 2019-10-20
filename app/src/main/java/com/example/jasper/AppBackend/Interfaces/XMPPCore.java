@@ -8,4 +8,5 @@ public interface XMPPCore{
     public List<Contact> getContactsListForCurrentUser();
     public boolean sendMessage(String messageToSend,String entityBareId);
     public void reLogin();
+    public void signup(String name,String username, String password,String confirmpassword);
 }

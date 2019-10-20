@@ -59,6 +59,8 @@ public class XmppCore implements XMPPCore {
             for (RosterEntry entry : entries) {
                 chatList.add(new Contact(entry.getName(),0));
             }
+
+            roster.setSubscriptionMode(Roster.SubscriptionMode.accept_all);
 //                try {
 //                    roster.createEntry(JidCreate.bareFrom("saif3@saifullah.chat"), "saif3", null);
 //                }
@@ -112,4 +114,11 @@ public class XmppCore implements XMPPCore {
 
         }
     }
+
+    @Override
+    public void signup(String name, String username, String password, String confirmpassword) {
+
+    }
+
+
 }

@@ -1,150 +1,181 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:2:1-25:12
-INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:2:1-25:12
-INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:2:1-25:12
-INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:2:1-25:12
-MERGED from [com.android.support:design:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\349ff9e23f7490ef830ec2f17ad44011\design-27.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:appcompat-v7:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\1ee1a41a4673e7b3823d88aff9031ff6\appcompat-v7-27.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0be8ac9c669ca43ba2dbd9e15aa86d41\constraint-layout-1.0.2\AndroidManifest.xml:2:1-11:12
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\b4fcf06f6b9f779f6c9a7ea99dbf10be\glide-4.9.0\AndroidManifest.xml:2:1-12:12
-MERGED from [com.github.markushi:circlebutton:1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\addea0c943e53260d275b4976dc7c0c1\circlebutton-1.1\AndroidManifest.xml:2:1-11:12
-MERGED from [de.hdodenhof:circleimageview:3.0.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\ca933d5a3bfc825828644214f8e32e49\circleimageview-3.0.0\AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:recyclerview-v7:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\9bf4c8ff3612aeaefd0631e922d5475c\recyclerview-v7-27.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:transition:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\e0c7d13eefe785cf1ca2bec49c4a1039\transition-27.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0acf24f2ff597dcffaf8b2af7821f8ec\gifdecoder-4.9.0\AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:support-v4:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\d028f2a2c2aa5461635e85f3f6496442\support-v4-27.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\ce0e94777a572c155dae5576fd0fe8c2\support-fragment-27.1.1\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\66305fec1df5d337329ed4d4f73e89c9\support-media-compat-27.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\4c4811b5ef6dc5e976d98609b035e43f\animated-vector-drawable-27.1.1\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\e403f59865783db2d1cd00fefe861ac3\support-core-ui-27.1.1\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\4ef67621d97da07958166ef80ea8a2e2\support-core-utils-27.1.1\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\cf563e5e101f8a565825eae0de9b4200\support-vector-drawable-27.1.1\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\14f32e59bfb41237fda3f005ba4b7226\support-compat-27.1.1\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0df9a8828126323eff8aa0a10b68140b\livedata-core-1.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\49bb1424736ce212db233f6a03c8fa05\viewmodel-1.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\80a88dae8353adc11fba685d87eecd7a\runtime-1.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\2c30710b90705ce63946384115511537\runtime-1.1.0\AndroidManifest.xml:17:1-22:12
-INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:2:1-25:12
-INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:2:1-25:12
-INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:2:1-25:12
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:2:1-40:12
+MERGED from [com.android.support:design:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\349ff9e23f7490ef830ec2f17ad44011\design-27.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\1ee1a41a4673e7b3823d88aff9031ff6\appcompat-v7-27.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0be8ac9c669ca43ba2dbd9e15aa86d41\constraint-layout-1.0.2\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-v4:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\d028f2a2c2aa5461635e85f3f6496442\support-v4-27.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\b4fcf06f6b9f779f6c9a7ea99dbf10be\glide-4.9.0\AndroidManifest.xml:2:1-12:12
+MERGED from [com.android.support:cardview-v7:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\91bf67769a8ce63bb376c323a96311b7\cardview-v7-27.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.markushi:circlebutton:1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\addea0c943e53260d275b4976dc7c0c1\circlebutton-1.1\AndroidManifest.xml:2:1-11:12
+MERGED from [de.hdodenhof:circleimageview:3.0.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\ca933d5a3bfc825828644214f8e32e49\circleimageview-3.0.0\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:recyclerview-v7:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\9bf4c8ff3612aeaefd0631e922d5475c\recyclerview-v7-27.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\e0c7d13eefe785cf1ca2bec49c4a1039\transition-27.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0acf24f2ff597dcffaf8b2af7821f8ec\gifdecoder-4.9.0\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\ce0e94777a572c155dae5576fd0fe8c2\support-fragment-27.1.1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\66305fec1df5d337329ed4d4f73e89c9\support-media-compat-27.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\4c4811b5ef6dc5e976d98609b035e43f\animated-vector-drawable-27.1.1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\e403f59865783db2d1cd00fefe861ac3\support-core-ui-27.1.1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\4ef67621d97da07958166ef80ea8a2e2\support-core-utils-27.1.1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\cf563e5e101f8a565825eae0de9b4200\support-vector-drawable-27.1.1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\14f32e59bfb41237fda3f005ba4b7226\support-compat-27.1.1\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0df9a8828126323eff8aa0a10b68140b\livedata-core-1.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\49bb1424736ce212db233f6a03c8fa05\viewmodel-1.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\80a88dae8353adc11fba685d87eecd7a\runtime-1.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\2c30710b90705ce63946384115511537\runtime-1.1.0\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:2:1-40:12
 	package
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:3:5-33
-		INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
-		INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:3:5-33
+		INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:2:1-25:12
-		INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:2:1-40:12
+		INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:2:1-25:12
-		INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:2:1-40:12
+		INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:2:11-69
-uses-permission#android.permission.INTERNET
-ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:5:5-67
-	android:name
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:5:22-64
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:7:5-23:19
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0be8ac9c669ca43ba2dbd9e15aa86d41\constraint-layout-1.0.2\AndroidManifest.xml:9:5-20
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0be8ac9c669ca43ba2dbd9e15aa86d41\constraint-layout-1.0.2\AndroidManifest.xml:9:5-20
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\b4fcf06f6b9f779f6c9a7ea99dbf10be\glide-4.9.0\AndroidManifest.xml:10:5-20
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\b4fcf06f6b9f779f6c9a7ea99dbf10be\glide-4.9.0\AndroidManifest.xml:10:5-20
-MERGED from [com.github.markushi:circlebutton:1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\addea0c943e53260d275b4976dc7c0c1\circlebutton-1.1\AndroidManifest.xml:9:5-20
-MERGED from [com.github.markushi:circlebutton:1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\addea0c943e53260d275b4976dc7c0c1\circlebutton-1.1\AndroidManifest.xml:9:5-20
-MERGED from [de.hdodenhof:circleimageview:3.0.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\ca933d5a3bfc825828644214f8e32e49\circleimageview-3.0.0\AndroidManifest.xml:9:5-20
-MERGED from [de.hdodenhof:circleimageview:3.0.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\ca933d5a3bfc825828644214f8e32e49\circleimageview-3.0.0\AndroidManifest.xml:9:5-20
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0acf24f2ff597dcffaf8b2af7821f8ec\gifdecoder-4.9.0\AndroidManifest.xml:9:5-20
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0acf24f2ff597dcffaf8b2af7821f8ec\gifdecoder-4.9.0\AndroidManifest.xml:9:5-20
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:5:5-36:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0be8ac9c669ca43ba2dbd9e15aa86d41\constraint-layout-1.0.2\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0be8ac9c669ca43ba2dbd9e15aa86d41\constraint-layout-1.0.2\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\b4fcf06f6b9f779f6c9a7ea99dbf10be\glide-4.9.0\AndroidManifest.xml:10:5-20
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\b4fcf06f6b9f779f6c9a7ea99dbf10be\glide-4.9.0\AndroidManifest.xml:10:5-20
+MERGED from [com.github.markushi:circlebutton:1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\addea0c943e53260d275b4976dc7c0c1\circlebutton-1.1\AndroidManifest.xml:9:5-20
+MERGED from [com.github.markushi:circlebutton:1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\addea0c943e53260d275b4976dc7c0c1\circlebutton-1.1\AndroidManifest.xml:9:5-20
+MERGED from [de.hdodenhof:circleimageview:3.0.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\ca933d5a3bfc825828644214f8e32e49\circleimageview-3.0.0\AndroidManifest.xml:9:5-20
+MERGED from [de.hdodenhof:circleimageview:3.0.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\ca933d5a3bfc825828644214f8e32e49\circleimageview-3.0.0\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0acf24f2ff597dcffaf8b2af7821f8ec\gifdecoder-4.9.0\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0acf24f2ff597dcffaf8b2af7821f8ec\gifdecoder-4.9.0\AndroidManifest.xml:9:5-20
 	android:supportsRtl
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:12:9-35
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:10:9-35
 	android:label
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:10:9-41
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:8:9-41
 	android:roundIcon
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:11:9-54
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:9:9-54
 	android:icon
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:9:9-43
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:7:9-43
 	android:allowBackup
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:8:9-35
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:6:9-35
 	android:theme
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:13:9-40
-activity#com.example.jasper.Activities.ChatListActivity
-ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:14:9-74
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:11:9-40
+activity#com.example.jasper.Activities.Signup
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:12:9-64
 	android:name
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:14:19-62
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:12:19-52
+activity#com.example.jasper.Activities.MainActivity.MainActivity
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:13:9-74
+	android:name
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:13:19-71
+activity#com.example.jasper.Activities.ImageDetailActivity
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:14:9-68
+	android:name
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:14:19-65
+activity#com.example.jasper.Activities.Chat.ChatActivity
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:15:9-21:20
+	android:theme
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:17:13-53
+	android:name
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:16:13-57
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:18:13-20:87
+	android:value
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:20:17-84
+	android:name
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:19:17-63
+activity#com.example.jasper.Activities.MainActivity.Fragments.ChatListFragment
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:22:9-24:65
+	android:theme
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:24:13-53
+	android:name
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:23:13-79
 activity#com.example.jasper.Activities.Login
-ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:15:9-21:20
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:25:9-31:20
 	android:name
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:15:19-51
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:25:19-51
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:16:13-20:29
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:26:13-30:29
 action#android.intent.action.MAIN
-ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:17:17-69
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:27:17-69
 	android:name
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:17:25-66
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:27:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:19:17-77
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:29:17-77
 	android:name
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:19:27-74
-activity#com.example.jasper.Activities.MainActivity
-ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:22:9-70
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:29:27-74
+meta-data#preloaded_fonts
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:33:9-35:57
+	android:resource
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:35:13-54
 	android:name
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml:22:19-58
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:34:13-43
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:38:5-67
+	android:name
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml:38:22-64
 uses-sdk
-INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
-INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
-MERGED from [com.android.support:design:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\349ff9e23f7490ef830ec2f17ad44011\design-27.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:design:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\349ff9e23f7490ef830ec2f17ad44011\design-27.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\1ee1a41a4673e7b3823d88aff9031ff6\appcompat-v7-27.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\1ee1a41a4673e7b3823d88aff9031ff6\appcompat-v7-27.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0be8ac9c669ca43ba2dbd9e15aa86d41\constraint-layout-1.0.2\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0be8ac9c669ca43ba2dbd9e15aa86d41\constraint-layout-1.0.2\AndroidManifest.xml:5:5-7:41
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\b4fcf06f6b9f779f6c9a7ea99dbf10be\glide-4.9.0\AndroidManifest.xml:6:5-8:41
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\b4fcf06f6b9f779f6c9a7ea99dbf10be\glide-4.9.0\AndroidManifest.xml:6:5-8:41
-MERGED from [com.github.markushi:circlebutton:1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\addea0c943e53260d275b4976dc7c0c1\circlebutton-1.1\AndroidManifest.xml:7:5-44
-MERGED from [com.github.markushi:circlebutton:1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\addea0c943e53260d275b4976dc7c0c1\circlebutton-1.1\AndroidManifest.xml:7:5-44
-MERGED from [de.hdodenhof:circleimageview:3.0.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\ca933d5a3bfc825828644214f8e32e49\circleimageview-3.0.0\AndroidManifest.xml:5:5-7:41
-MERGED from [de.hdodenhof:circleimageview:3.0.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\ca933d5a3bfc825828644214f8e32e49\circleimageview-3.0.0\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:recyclerview-v7:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\9bf4c8ff3612aeaefd0631e922d5475c\recyclerview-v7-27.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\9bf4c8ff3612aeaefd0631e922d5475c\recyclerview-v7-27.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\e0c7d13eefe785cf1ca2bec49c4a1039\transition-27.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\e0c7d13eefe785cf1ca2bec49c4a1039\transition-27.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0acf24f2ff597dcffaf8b2af7821f8ec\gifdecoder-4.9.0\AndroidManifest.xml:5:5-7:41
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0acf24f2ff597dcffaf8b2af7821f8ec\gifdecoder-4.9.0\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:support-v4:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\d028f2a2c2aa5461635e85f3f6496442\support-v4-27.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\d028f2a2c2aa5461635e85f3f6496442\support-v4-27.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\ce0e94777a572c155dae5576fd0fe8c2\support-fragment-27.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\ce0e94777a572c155dae5576fd0fe8c2\support-fragment-27.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\66305fec1df5d337329ed4d4f73e89c9\support-media-compat-27.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\66305fec1df5d337329ed4d4f73e89c9\support-media-compat-27.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\4c4811b5ef6dc5e976d98609b035e43f\animated-vector-drawable-27.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\4c4811b5ef6dc5e976d98609b035e43f\animated-vector-drawable-27.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\e403f59865783db2d1cd00fefe861ac3\support-core-ui-27.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\e403f59865783db2d1cd00fefe861ac3\support-core-ui-27.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\4ef67621d97da07958166ef80ea8a2e2\support-core-utils-27.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\4ef67621d97da07958166ef80ea8a2e2\support-core-utils-27.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\cf563e5e101f8a565825eae0de9b4200\support-vector-drawable-27.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\cf563e5e101f8a565825eae0de9b4200\support-vector-drawable-27.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\14f32e59bfb41237fda3f005ba4b7226\support-compat-27.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\14f32e59bfb41237fda3f005ba4b7226\support-compat-27.1.1\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0df9a8828126323eff8aa0a10b68140b\livedata-core-1.1.0\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\0df9a8828126323eff8aa0a10b68140b\livedata-core-1.1.0\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\49bb1424736ce212db233f6a03c8fa05\viewmodel-1.1.0\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\49bb1424736ce212db233f6a03c8fa05\viewmodel-1.1.0\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\80a88dae8353adc11fba685d87eecd7a\runtime-1.1.0\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\80a88dae8353adc11fba685d87eecd7a\runtime-1.1.0\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\2c30710b90705ce63946384115511537\runtime-1.1.0\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.0] C:\Users\saifu\.gradle\caches\transforms-2\files-2.1\2c30710b90705ce63946384115511537\runtime-1.1.0\AndroidManifest.xml:20:5-44
-INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
-INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
+MERGED from [com.android.support:design:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\349ff9e23f7490ef830ec2f17ad44011\design-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\349ff9e23f7490ef830ec2f17ad44011\design-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\1ee1a41a4673e7b3823d88aff9031ff6\appcompat-v7-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\1ee1a41a4673e7b3823d88aff9031ff6\appcompat-v7-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0be8ac9c669ca43ba2dbd9e15aa86d41\constraint-layout-1.0.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0be8ac9c669ca43ba2dbd9e15aa86d41\constraint-layout-1.0.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\d028f2a2c2aa5461635e85f3f6496442\support-v4-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\d028f2a2c2aa5461635e85f3f6496442\support-v4-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\b4fcf06f6b9f779f6c9a7ea99dbf10be\glide-4.9.0\AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\b4fcf06f6b9f779f6c9a7ea99dbf10be\glide-4.9.0\AndroidManifest.xml:6:5-8:41
+MERGED from [com.android.support:cardview-v7:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\91bf67769a8ce63bb376c323a96311b7\cardview-v7-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\91bf67769a8ce63bb376c323a96311b7\cardview-v7-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.github.markushi:circlebutton:1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\addea0c943e53260d275b4976dc7c0c1\circlebutton-1.1\AndroidManifest.xml:7:5-44
+MERGED from [com.github.markushi:circlebutton:1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\addea0c943e53260d275b4976dc7c0c1\circlebutton-1.1\AndroidManifest.xml:7:5-44
+MERGED from [de.hdodenhof:circleimageview:3.0.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\ca933d5a3bfc825828644214f8e32e49\circleimageview-3.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [de.hdodenhof:circleimageview:3.0.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\ca933d5a3bfc825828644214f8e32e49\circleimageview-3.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:recyclerview-v7:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\9bf4c8ff3612aeaefd0631e922d5475c\recyclerview-v7-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\9bf4c8ff3612aeaefd0631e922d5475c\recyclerview-v7-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\e0c7d13eefe785cf1ca2bec49c4a1039\transition-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\e0c7d13eefe785cf1ca2bec49c4a1039\transition-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0acf24f2ff597dcffaf8b2af7821f8ec\gifdecoder-4.9.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0acf24f2ff597dcffaf8b2af7821f8ec\gifdecoder-4.9.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\ce0e94777a572c155dae5576fd0fe8c2\support-fragment-27.1.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\ce0e94777a572c155dae5576fd0fe8c2\support-fragment-27.1.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\66305fec1df5d337329ed4d4f73e89c9\support-media-compat-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\66305fec1df5d337329ed4d4f73e89c9\support-media-compat-27.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\4c4811b5ef6dc5e976d98609b035e43f\animated-vector-drawable-27.1.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\4c4811b5ef6dc5e976d98609b035e43f\animated-vector-drawable-27.1.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\e403f59865783db2d1cd00fefe861ac3\support-core-ui-27.1.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\e403f59865783db2d1cd00fefe861ac3\support-core-ui-27.1.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\4ef67621d97da07958166ef80ea8a2e2\support-core-utils-27.1.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\4ef67621d97da07958166ef80ea8a2e2\support-core-utils-27.1.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\cf563e5e101f8a565825eae0de9b4200\support-vector-drawable-27.1.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\cf563e5e101f8a565825eae0de9b4200\support-vector-drawable-27.1.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\14f32e59bfb41237fda3f005ba4b7226\support-compat-27.1.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\14f32e59bfb41237fda3f005ba4b7226\support-compat-27.1.1\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0df9a8828126323eff8aa0a10b68140b\livedata-core-1.1.0\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\0df9a8828126323eff8aa0a10b68140b\livedata-core-1.1.0\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\49bb1424736ce212db233f6a03c8fa05\viewmodel-1.1.0\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\49bb1424736ce212db233f6a03c8fa05\viewmodel-1.1.0\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\80a88dae8353adc11fba685d87eecd7a\runtime-1.1.0\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\80a88dae8353adc11fba685d87eecd7a\runtime-1.1.0\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\2c30710b90705ce63946384115511537\runtime-1.1.0\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Ayesha\.gradle\caches\transforms-2\files-2.1\2c30710b90705ce63946384115511537\runtime-1.1.0\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
-		INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
-		ADDED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
-		INJECTED from D:\Projects\AndroidProjects\Jasper\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Ayesha\Desktop\Jasper\app\src\main\AndroidManifest.xml

@@ -1,5 +1,6 @@
 package com.example.jasper.Activities;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,9 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jasper.Activities.MainActivity.MainActivity;
+import com.example.jasper.DialogBox;
+import com.example.jasper.Notification;
 import com.example.jasper.R;
 import com.example.jasper.AppBackend.Xmpp.XMPPConnection;
 
@@ -19,9 +23,12 @@ public class Login extends AppCompatActivity {
     EditText passwordView,usernameView,domainView;
     Button loginBtn;
     ProgressBar progressBar;
+    TextView signup;
     private static Login instance;
     private static final String TAG = "Login";
-    
+    Notification notification;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +39,15 @@ public class Login extends AppCompatActivity {
         domainView.setText(getString(R.string.domain));
         loginBtn = findViewById(R.id.loginBtn);
         progressBar = findViewById(R.id.progressBar);
+        signup=findViewById(R.id.createOne);
         instance = this;
-        
+        notification=new Notification(this);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (perfromCheck()){
+              //  notification.displayNotification();
+
+               if (perfromCheck()){
                     progressBar.setVisibility(View.VISIBLE);
                     final String username = usernameView.getText().toString().trim();
                     final String password = passwordView.getText().toString().trim();
@@ -45,6 +55,14 @@ public class Login extends AppCompatActivity {
                     XMPPConnection.setConnection(username,password,domain);
                 }
                 
+            }
+        });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Login.this,Signup.class);
+                startActivity(i);
             }
         });
     }

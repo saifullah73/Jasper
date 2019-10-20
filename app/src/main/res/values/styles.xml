@@ -52,4 +52,23 @@
         <!--        <item name="tabTextAppearance">@style/AppTabTextAppearance</item>-->
     </style>
 
+
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/inputHintColor</item>
+        <item name="android:textSize">20sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/inputHintColor</item>
+        <item name="colorControlNormal">@color/inputHintColor</item>
+        <item name="colorControlActivated">@color/inputHintColor</item>
+    </style>
+
+    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
+     <!--  <item name="android:textColor">@color/White</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:headerDividersEnabled">true</item>
+        <item name="android:typeface">normal</item>-->
+        <item name="android:background">@color/dialogBoxBackground</item>
+    </style>
+
 </resources>

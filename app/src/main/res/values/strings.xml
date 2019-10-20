@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Jasper</string>
     <string name="domain">192.168.10.5</string>
-    <string name="domainName">saifullah.chat</string>
+    <string name="domainName">owais.chat</string>
     <string name="messages_date_format">dd/MM/yyyy, HH:mm</string>
     <string name="messages_list_date_format">dd/MM</string>
     <string name="today_date_format">dd/MM/yyyy, HH:mm</string>

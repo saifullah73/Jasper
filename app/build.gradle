@@ -39,4 +39,5 @@ dependencies {
         exclude module: 'smack-omemo'
         exclude module: 'smack-omemo-signal'
     }
+
 }
