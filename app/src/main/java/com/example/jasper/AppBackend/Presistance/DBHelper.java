@@ -55,6 +55,7 @@ public class DBHelper {
     }
 
     public void putMessageInDB(String to,String from,String timestamp, String msg){
+        Log.i("DBTESt","to = "+to + "from "+ from);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("form_id",from);

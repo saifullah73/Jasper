@@ -10,8 +10,10 @@ import android.os.Bundle;
 
 import com.example.jasper.Activities.Chat.ChatActivity;
 import com.example.jasper.Activities.MainActivity.AddChatDialog;
+import com.example.jasper.Activities.MainActivity.MainActivity;
 import com.example.jasper.Adapters.ChatListAdapter;
 import com.example.jasper.AppBackend.Xmpp.XmppCore;
+import com.example.jasper.Constants;
 import com.example.jasper.Interfaces.ChatListClickListener;
 import com.example.jasper.Models.Contact;
 import com.example.jasper.R;
@@ -29,6 +31,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 
@@ -63,6 +66,7 @@ public class ChatListFragment extends Fragment implements ChatListClickListener{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mInstance = this;
     }
 
     @Nullable
@@ -116,26 +120,15 @@ public class ChatListFragment extends Fragment implements ChatListClickListener{
             public void onClick(View view) {
                 AddChatDialog dialog = new AddChatDialog(getActivity());
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
+                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                lp.copyFrom(dialog.getWindow().getAttributes());
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
                 dialog.show();
+                dialog.getWindow().setAttributes(lp);
             }
         });
 
-
-//        selectDeselect.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (chatListAdapter.areAllItemSelected()) {
-//                    selectDeselect.setImageDrawable(getResources().getDrawable(R.drawable.select_all, getContext().getTheme()));
-//                    chatListAdapter.deselectAll();
-//                } else {
-//                    selectDeselect.setImageDrawable(getResources().getDrawable(R.drawable.deselect_all, getContext().getTheme()));
-//                    chatListAdapter.selectAll();
-//                }
-//            }
-//        });
-//        refresh();
-//    }
     }
 
         private void updateChatRoomsFromServer() {
@@ -150,18 +143,23 @@ public class ChatListFragment extends Fragment implements ChatListClickListener{
 
 
     public void refresh() {
-        chatroomList = getChatList();
-        if (chatroomList.isEmpty()) {
-            Log.i(TAG, "refresh: empty");
-            noChatsToShowView.setVisibility(View.VISIBLE);
-            swipeRefreshLayout.setVisibility(View.GONE);
-        } else {
-            Log.i(TAG, "refresh: not empty");
-            noChatsToShowView.setVisibility(View.GONE);
-            swipeRefreshLayout.setVisibility(View.VISIBLE);
-        }
-        chatListAdapter.setDataset(chatroomList);
-        chatListAdapter.notifyDataSetChanged();
+        MainActivity.getInstance().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                chatroomList = getChatList();
+                if (chatroomList.isEmpty()) {
+                    Log.i(TAG, "refresh: empty");
+                    noChatsToShowView.setVisibility(View.VISIBLE);
+                    swipeRefreshLayout.setVisibility(View.GONE);
+                } else {
+                    Log.i(TAG, "refresh: not empty");
+                    noChatsToShowView.setVisibility(View.GONE);
+                    swipeRefreshLayout.setVisibility(View.VISIBLE);
+                }
+                chatListAdapter.setDataset(chatroomList);
+                chatListAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     public boolean getIsDeleteMode() {
@@ -179,32 +177,6 @@ public class ChatListFragment extends Fragment implements ChatListClickListener{
         selectDeselect.setVisibility(View.GONE);
     }
 
-    public void enterDeleteMode() {
-        setIsDeleteMode(true);
-        deletechat.setVisibility(View.VISIBLE);
-        selectDeselect.setVisibility(View.VISIBLE);
-        selectDeselect.setImageDrawable(getResources().getDrawable(R.drawable.select_all, getActivity().getApplication().getTheme()));
-    }
-
-//    private void removeChatsConversation(List<Contact> rooms) {
-//        if (rooms.size() == 0) {
-//            Toast.makeText(this, "No items selected", Toast.LENGTH_SHORT).show();
-//            chatListAdapter.getOutOfDeleteMode();
-//        } else {
-//            for (int i = 0; i < rooms.size(); i++) {
-//                String sipUri = rooms.get(i).getSipUri();
-//                if (sipUri != null) {
-//                    SygnalChatRoom chatroom = SygnalManager.getLc().getOrCreateChatRoom(sipUri);
-//                    if (chatroom != null) {
-//                        chatroom.deleteHistory();
-//                    }
-//                }
-//            }
-//            Toast.makeText(getContext(), "Chatrooms deleted successfully", Toast.LENGTH_SHORT).show();
-//            ChatActivity.getInstance().updateMissedChatCount();
-//            refresh();
-//        }
-//    }
 
     public void change(int i, Context context) {
         int size = 0;
@@ -238,7 +210,9 @@ public class ChatListFragment extends Fragment implements ChatListClickListener{
     public void onItemClick(int position) {
         Intent i = new Intent(getActivity(), ChatActivity.class);
         i.putExtra("username",chatListAdapter.getItem(position).getName());
+        Constants.unread.put(chatListAdapter.getItem(position).getName(),0);
         startActivity(i);
+        MainActivity.getInstance().updateMissedChatCount();
         refresh();
     }
 

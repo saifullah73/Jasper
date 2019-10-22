@@ -9,11 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jasper.Activities.Chat.ChatActivity;
 import com.example.jasper.AppBackend.Xmpp.XmppCore;
 import com.example.jasper.Constants;
 import com.example.jasper.R;
+
+import static android.view.View.GONE;
 
 public class AddChatDialog extends Dialog implements android.view.View.OnClickListener {
 
@@ -47,6 +50,7 @@ public class AddChatDialog extends Dialog implements android.view.View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add_chat_dialog:
+                addChat();
                 break;
             case R.id.cancel_dialog:
                 dismiss();
@@ -54,11 +58,19 @@ public class AddChatDialog extends Dialog implements android.view.View.OnClickLi
             default:
                 break;
         }
-        dismiss();
     }
 
     private void addChat(){
+        progressBar.setVisibility(View.VISIBLE);
         String username = editText.getText().toString().trim();
-        XmppCore.getInstance().sendMessage("HI",username+"@"+ Constants.domain);
+        XmppCore.getInstance().searchUser(username);
+        if(MainActivity.getInstance().addNewUser(username)){
+            progressBar.setVisibility(GONE);
+            dismiss();
+        }
+        else{
+            errorText.setText("Error");
+            Toast.makeText(activity,"Error",Toast.LENGTH_SHORT).show();
+        }
     }
 }

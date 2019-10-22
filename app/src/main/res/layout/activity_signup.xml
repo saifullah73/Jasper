@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/backgroundStartColor"
+tools:context=".Activities.Signup">
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/UsertextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="40dp"
+        android:hint="Username"
+        android:theme="@style/TextLabel"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/UsertextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/inputHintColor"
+            android:drawableLeft="@drawable/ic_user"
+            android:drawablePadding="20dp"
+
+            android:inputType="text"
+            android:textColor="@color/inputHintColor"
+            android:textColorHighlight="@color/inputHintColor"
+            android:textColorLink="@color/inputHintColor" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+<android.support.design.widget.TextInputLayout
+    android:id="@+id/NametextInputLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="40dp"
+    android:hint="Name"
+    android:theme="@style/TextLabel"
+    app:hintAnimationEnabled="true"
+    app:hintEnabled="true"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/UsertextInputLayout">
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/NametextInputEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/inputHintColor"
+        android:drawableLeft="@drawable/ic_name"
+        android:drawablePadding="20dp"
+
+        android:inputType="text"
+        android:textColor="@color/inputHintColor"
+        android:textColorHighlight="@color/inputHintColor"
+        android:textColorLink="@color/inputHintColor" />
+
+</android.support.design.widget.TextInputLayout>
+
+
+
+
+<android.support.design.widget.TextInputLayout
+    android:id="@+id/PasswordtextInputLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="40dp"
+    android:hint="Password"
+    android:theme="@style/TextLabel"
+    app:hintAnimationEnabled="true"
+    app:hintEnabled="true"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="1.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/NametextInputLayout">
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/PasswordtextInputEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/inputHintColor"
+        android:drawableLeft="@drawable/ic_password"
+        android:drawablePadding="20dp"
+        android:inputType="text|textPassword"
+        android:textColor="@color/inputHintColor"
+        android:textColorHighlight="@color/inputHintColor"
+        android:textColorLink="@color/inputHintColor" />
+
+</android.support.design.widget.TextInputLayout>
+
+<android.support.design.widget.TextInputLayout
+    android:id="@+id/cctextInputLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="40dp"
+    android:hint="Confirm Password"
+    android:textAlignment="center"
+    android:theme="@style/TextLabel"
+    app:hintAnimationEnabled="true"
+    app:hintEnabled="true"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="1.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/PasswordtextInputLayout">
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/cc_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/inputHintColor"
+        android:drawableLeft="@drawable/ic_password"
+        android:drawablePadding="20dp"
+        android:inputType="text|textPassword"
+        android:textColor="@color/inputHintColor"
+
+        android:textColorHighlight="@color/inputHintColor"
+        android:textColorHint="@color/inputHintColor"
+        android:textColorLink="@color/inputHintColor" />
+
+</android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/ddInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:hint="Domain"
+        android:textAlignment="center"
+        android:theme="@style/TextLabel"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cctextInputLayout">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/dd_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/inputHintColor"
+            android:drawableLeft="@drawable/domain_icon"
+            android:drawablePadding="20dp"
+            android:inputType="text"
+            android:textColor="@color/inputHintColor"
+
+            android:textColorHighlight="@color/inputHintColor"
+            android:textColorHint="@color/inputHintColor"
+            android:textColorLink="@color/inputHintColor" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:background="@color/loginButtonColor"
+        android:text="Create New Account"
+        android:textColor="@color/inputHintColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ddInputLayout" />
+
+    <ProgressBar
+        android:id="@+id/signup_prog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signupButton"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/berkshire_swash"
+        android:text="J"
+        android:textColor="@color/fullwhite"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

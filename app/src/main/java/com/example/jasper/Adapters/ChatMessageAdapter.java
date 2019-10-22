@@ -584,6 +584,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private void handleIfTextMessage(final RecyclerView.ViewHolder holder, final MessageModel message, String type, final int position) {
         if (type.equals("sent")) {
+
             ((SentMessageViewHolder) holder).sentImageMsgParentLayout.setVisibility(GONE);
             ((SentMessageViewHolder) holder).sentLocationMsgParentLayout.setVisibility(GONE);
             ((SentMessageViewHolder) holder).sentTextMsgParentLayout.setVisibility(VISIBLE);

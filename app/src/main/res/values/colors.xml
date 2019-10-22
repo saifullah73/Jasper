@@ -82,4 +82,17 @@
     <color name="galleryButtonColor">#702A8B</color>
     <color name="locationButtonColor">#F96358</color>
     <color name="messageBodyColor">#317C37</color>
+
+    <!--LoginActivityColor-->
+
+    <color name="backgroundStartColor">#121A25</color>
+    <color name="loginButtonColor">#317C37</color>
+
+    <color name="dialogBoxBackground">#777199</color>
+    <color name="inputHintColor">#a39f9e</color>
+    <color name="backgroundEndColor">#7b7987</color>
+
+
+
+
 </resources>

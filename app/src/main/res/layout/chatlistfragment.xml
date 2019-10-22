@@ -64,11 +64,13 @@
         android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
         android:elevation="5dp"
         android:src="@drawable/add"
         app:backgroundTint="@color/green"
         app:layout_constraintBottom_toBottomOf="@+id/chat_list_swipe_refresh"
-        app:layout_constraintEnd_toEndOf="@+id/chat_list_swipe_refresh"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/delete_chatroom"

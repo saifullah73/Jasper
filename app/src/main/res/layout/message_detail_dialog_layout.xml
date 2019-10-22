@@ -8,7 +8,8 @@
     android:layout_marginRight="24dp"
     android:background="@drawable/background_for_message_detail_dialog"
     android:paddingTop="12dp"
-    android:paddingBottom="12dp">
+    android:paddingBottom="12dp"
+    android:maxHeight="200dp">
 
     <TextView
         android:id="@+id/textview2"
@@ -17,7 +18,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="338dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="100dp"
         android:text="Status:"
         android:textColor="@color/fullwhite"
         android:textSize="17sp"
@@ -33,9 +34,7 @@
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="241dp"
+        android:layout_marginStart="20dp"
         android:text="Message detail"
         android:textColor="@color/fullwhite"
         android:textSize="20sp"
@@ -44,7 +43,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
     </TextView>
 

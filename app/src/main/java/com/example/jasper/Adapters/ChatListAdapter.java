@@ -10,9 +10,13 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 
+import com.example.jasper.Activities.Chat.ChatActivity;
+import com.example.jasper.Activities.MainActivity.MainActivity;
+import com.example.jasper.Constants;
 import com.example.jasper.Interfaces.ChatListClickListener;
 import com.example.jasper.Models.Contact;
 import com.example.jasper.R;
+import com.example.jasper.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,11 +52,11 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
         String name = contact.getName();
         holder.usernameview.setText(name);
         holder.lastMessageView.setText("");
+        Log.i("Unread","contact = "+ contact.getName() + " = "+contact.getUnreadMessageCount());
         if (contact.getUnreadMessageCount() > 0) {
             holder.usernameview.setTypeface(null, Typeface.BOLD);
             holder.unreadMessageView.setText(String.valueOf(contact.getUnreadMessageCount()));
             holder.unreadMessageView.setVisibility(View.VISIBLE);
-            //ChatActivity.getInstance().updateMissedChatCount();
             if (contact.getUnreadMessageCount() > 99) {
                 holder.unreadMessageView.setText("99+");
             }
@@ -60,14 +64,19 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
             holder.unreadMessageView.setVisibility(View.GONE);
             holder.usernameview.setTypeface(null, Typeface.NORMAL);
         }
-        //holder.timestampView.setText(SygnalUtils.timestampToHumanDate(ChatActivity.getInstance(), chatRoom.getLastMessageTime(), ChatListFragment.getInstance().getString(R.string.messages_list_date_format)));
+        if(Constants.lastMessage.get(contact.getName()) != null) {
+            holder.timestampView.setText(Utils.timestampToHumanDate(MainActivity.getInstance(), Constants.lastMessage.get(contact.getName()), MainActivity.getInstance().getString(R.string.messages_list_date_format)));
+        }
+        else{
+            holder.timestampView.setText("");
+        }
 
 
         holder.layout.setOnClickListener(holder);
         holder.layout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                enterDeleteMode();
+                //enterDeleteMode();
                 return false;
             }
         });
