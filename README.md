@@ -5,7 +5,8 @@ Jasper is an Android chat Application based on the XMPP protocol, it uses SMACK 
 A seperate MYSQL server is also set up to maintain chat histories. Jasper features a modular desgin, allowing for easy extension in
 functionality.
 
-![alt text](https://raw.githubusercontent.com/saifullah73/Jasper/main/1.jpg)
+<img src="Screenshots/1.jpg" width="100"> <img src="Screenshots/2.jpg" width="100"> <img src="Screenshots/3.jpg" width="100">
+<img src="Screenshots/4.jpg" width="100"> <img src="Screenshots/5.jpg" width="100"> <img src="Screenshots/6.jpg" width="100">
 
 ## Features
 - One to One Chat
