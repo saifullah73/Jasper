@@ -13,6 +13,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jasper.AppBackend.Interfaces.VolleyCallback;
+import com.example.jasper.Constants;
+import com.example.jasper.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +25,7 @@ public class DB {
 
     Context context;
     //BASE URL
-    String url = "http://192.168.10.8:3000/";
+    String url = "http://192.168.10.5:3000/";
 
     //SPECIFIC ENDPOINTS
     String endpointPOST = "store";
@@ -34,6 +36,8 @@ public class DB {
 
     public DB(Context context) {
         this.context = context;
+        this.url = "http://"+ Constants.domainId + ":3000/";
+        Log.i("DBURL",this.url);
         requestQueue = Volley.newRequestQueue(context);
     }
 
@@ -42,6 +46,7 @@ public class DB {
      * STRING ( FROM_ID, TO_ID, DURATION)
      * Duration should be specified using hyphens in dd-mm-yy format
      ***/
+
     public JSONArray getData(String from_id, String to_id, String duration,final VolleyCallback callback){
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url + endpointSEND + from_id+"/" +to_id+"/"+duration, new Response.Listener<JSONArray>() {
             @Override

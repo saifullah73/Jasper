@@ -1,5 +1,7 @@
 package com.example.jasper.AppBackend.Xmpp;
 
+import android.util.Log;
+
 import com.example.jasper.Activities.Login;
 import com.example.jasper.Constants;
 
@@ -22,7 +24,7 @@ import javax.net.ssl.SSLSession;
 
 public class XMPPConnection {
     private static final String TAG = "XMPPConnection";
-    public static AbstractXMPPConnection mConnection;
+    public static AbstractXMPPConnection mConnection = null;
 
 
     public static void setConnection(final String username,final  String password, final String domain){
@@ -62,7 +64,6 @@ public class XMPPConnection {
 
                 try {
                     mConnection.connect();
-                    // all these proceedure also thrown error if you does not seperate this thread now we seperate thread create
                     mConnection.login();
 
                     if(mConnection.isAuthenticated() && mConnection.isConnected()){
@@ -72,16 +73,20 @@ public class XMPPConnection {
                     }
 
                 } catch (SmackException e) {
-                    Login.getInstance().failure();
+                    Login.getInstance().failure(e);
+                    Log.i("CoreMessages", "A error");
                     e.printStackTrace();
                 } catch (IOException e) {
-                    Login.getInstance().failure();
+                    Log.i("CoreMessages", "A error");
+                    Login.getInstance().failure(e);
                     e.printStackTrace();
                 } catch (XMPPException e) {
-                    Login.getInstance().failure();
+                    Log.i("CoreMessages", "A error");
+                    Login.getInstance().failure(e);
                     e.printStackTrace();
                 } catch (InterruptedException e) {
-                    Login.getInstance().failure();
+                    Log.i("CoreMessages", "A error");
+                    Login.getInstance().failure(e);
                     e.printStackTrace();
                 }
             }

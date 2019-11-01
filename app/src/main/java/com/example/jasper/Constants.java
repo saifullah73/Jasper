@@ -6,6 +6,7 @@ import java.util.Map;
 public class Constants {
     public static String domain = "saifullah.chat";
     public static String resource = "mobile";
+    public static String domainId = "";
     public static String currentUser = "";
     public static Map<String, String> map = new HashMap<String, String>();
     public static Map<String,Integer> unread = new HashMap<String, Integer>();

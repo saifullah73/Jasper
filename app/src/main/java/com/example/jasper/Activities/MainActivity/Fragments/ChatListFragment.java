@@ -209,7 +209,15 @@ public class ChatListFragment extends Fragment implements ChatListClickListener{
     @Override
     public void onItemClick(int position) {
         Intent i = new Intent(getActivity(), ChatActivity.class);
-        i.putExtra("username",chatListAdapter.getItem(position).getName());
+        String username = chatListAdapter.getItem(position).getName();
+        String jid = username+ "@"+ Constants.domain;
+        i.putExtra("username",username);
+        String resource = XmppCore.getInstance().getResourceOfUser(jid);
+        Log.i("XmppCoreR", "ChatList() username= "+username);
+        if (resource !=null){
+            Log.i("XmppCoreR", "ChatList() resource= "+resource);
+            Constants.map.put(username,resource);
+        }
         Constants.unread.put(chatListAdapter.getItem(position).getName(),0);
         startActivity(i);
         MainActivity.getInstance().updateMissedChatCount();

@@ -12,9 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jasper.Activities.MainActivity.MainActivity;
+import com.example.jasper.Constants;
 import com.example.jasper.Notifications.Notifications;
 import com.example.jasper.R;
 import com.example.jasper.AppBackend.Xmpp.XMPPConnection;
+import com.example.jasper.Utils;
 
 public class Login extends AppCompatActivity {
     
@@ -43,10 +45,11 @@ public class Login extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  notification.displayNotification();
-
+              //notification.displayNotification();
                if (perfromCheck()){
                     progressBar.setVisibility(View.VISIBLE);
+                    loginBtn.setEnabled(false);
+                   Utils.hideKeyboard(instance);
                     final String username = usernameView.getText().toString().trim();
                     final String password = passwordView.getText().toString().trim();
                     final String domain = domainView.getText().toString().trim();
@@ -92,6 +95,7 @@ public class Login extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 Log.e(TAG, "run: auth done and connected successfully" );
                 Intent i = new Intent(Login.this, MainActivity.class);
+                Constants.domainId = domainView.getText().toString().trim();
                 startActivity(i);
                 finish();
             }
@@ -99,11 +103,14 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void failure(){
+    public void failure(Exception e){
+        Log.i("Login", "Error = "+ e.toString());
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                loginBtn.setEnabled(true);
                 Toast.makeText(getApplicationContext(),"Cannot login",Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
     }

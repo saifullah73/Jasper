@@ -17,6 +17,7 @@ import com.example.jasper.AppBackend.Interfaces.XMPPCore;
 import com.example.jasper.AppBackend.Xmpp.XmppCore;
 import com.example.jasper.Models.Contact;
 import com.example.jasper.R;
+import com.example.jasper.Utils;
 
 import java.util.List;
 
@@ -60,19 +61,19 @@ public class Signup extends AppCompatActivity implements View.OnClickListener  {
 
         if (v==signUp){
             Editable editName=(Editable) name.getText();
-            String name=editName.toString();
+            String name=editName.toString().trim();
 
             Editable editUser=(Editable) username.getText();
-            String user=editUser.toString();
+            String user=editUser.toString().trim();
 
             Editable editPass=(Editable) password.getText();
-            String password=editPass.toString();
+            String password=editPass.toString().trim();
 
             Editable editConfirm=(Editable) confirmpassword.getText();
-            String confirmPass=editConfirm.toString();
+            String confirmPass=editConfirm.toString().trim();
 
             Editable domain0=(Editable) domain.getText();
-            String domain1=domain0.toString();
+            String domain1=domain0.toString().trim();
 
             if (name.length() ==0 || username.length() == 0){
                 Toast.makeText(this,"Please fill all fields",Toast.LENGTH_SHORT).show();
@@ -84,6 +85,8 @@ public class Signup extends AppCompatActivity implements View.OnClickListener  {
                 Toast.makeText(this,"Password do not match",Toast.LENGTH_SHORT).show();
             }
             else {
+                signUp.setEnabled(false);
+                Utils.hideKeyboard(instance);
                 progressBar.setVisibility(View.VISIBLE);
                 XmppCore.signup(name, user, password, domain1);
             }
@@ -110,6 +113,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener  {
             @Override
             public void run() {
                // progressBar.setVisibility(View.GONE);
+                signUp.setEnabled(true);
                 Toast.makeText(getApplicationContext(),"Error creating account",Toast.LENGTH_SHORT).show();
             }
         });

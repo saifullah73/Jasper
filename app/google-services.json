@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "752386053973",
+    "firebase_url": "https://jasper-bdab5.firebaseio.com",
+    "project_id": "jasper-bdab5",
+    "storage_bucket": "jasper-bdab5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752386053973:android:3b1c8c7e4e136855e641dc",
+        "android_client_info": {
+          "package_name": "com.example.jasper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752386053973-81gsopcipst3v72fg1u86hc86o7js9mh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCAQ_EvvObkUAioYa19bfB815nkCNPQak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752386053973-81gsopcipst3v72fg1u86hc86o7js9mh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

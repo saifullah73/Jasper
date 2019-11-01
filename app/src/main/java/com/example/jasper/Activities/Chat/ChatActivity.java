@@ -348,6 +348,7 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
         scrollToBottom.setVisibility(GONE);
         mMessages.add(message);
         updateAdapter();
+        Log.i("Message", "inserted");
     }
 
     private void initRecyclerView() {
@@ -647,7 +648,7 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
             DBHelper.getInstance(getApplicationContext()).putMessageInDB(username, Constants.currentUser, getTimestamp(), messageToSend);
             insertMessage(data);
         } else {
-            Toast.makeText(getApplicationContext(), "Error sending message", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "Error sending message", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -675,7 +676,7 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
             DBHelper.getInstance(getApplicationContext()).putMessageInDB(username, Constants.currentUser, getTimestamp(), messageToSend);
             insertMessage(data);
         } else {
-            Toast.makeText(getApplicationContext(), "Error sending message", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "Error sending message", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -739,7 +740,7 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
         if (filename.length > 1) {
             String filenamedata = filename[1];
 
-            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/Sygnal/"); //Creates app specific folder
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/Jasper/"); //Creates app specific folder
             if (!path.exists())
                 path.mkdirs();
 
@@ -779,7 +780,7 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
         Location location = Loc.getLocation();
         // Making Protocol to send the currentLocation
         if (location == null) {
-            Toast.makeText(this, "Permission Required", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please grant permission and turn on location services", Toast.LENGTH_SHORT).show();
             return;
         }
         String Protocol = "##location##" + location.getLatitude() + "," + location.getLongitude();
@@ -895,23 +896,48 @@ public class ChatActivity extends AppCompatActivity implements ChatMessageAdapte
 
 
     private void sendFile(String fileToUploadPath) {
+        String username = this.username;
+        String jid = username+ "@"+ Constants.domain;
+        String resource = XmppCore.getInstance().getResourceOfUser(jid);
+        Log.i("XmppCoreR", "ChatList() username= "+username);
+        if (resource !=null){
+            Log.i("XmppCoreR", "ChatList() resource= "+resource);
+            Constants.map.put(username,resource);
+        }
+        Toast.makeText(this,"Uploading",Toast.LENGTH_SHORT).show();
         try {
             String res = Constants.map.get(username);
             if (res == null) {
                 res = "mobile";
+                Log.i("XmppCoreR","Got null res on file upload");
+                Toast.makeText(getApplication(), "Cannot send file at the moment, please try again later", Toast.LENGTH_SHORT).show();
+            }
+            if (res.equals("")){
+                Log.i("XmppCoreR","Got Empty Res on file upload");
+                res = "mobile";
+                Toast.makeText(getApplication(), "Cannot send file at the moment, please try again later", Toast.LENGTH_SHORT).show();
             }
             XmppCore.getInstance().sendFile(username, fileToUploadPath, "file", res, ff);
-            if (Utils.isImage(fileToUploadPath)) {
-                Log.i("FileUpload", "sendFile(): isImage = true");
-                sendTextMessage("##image##" + fileToUploadPath, MessageType.IMAGE, username + "@" + domainName, "uploaded");
-            } else {
-                Log.i("FileUpload", "sendFile(): isImage = false");
-                sendTextMessage("##file##" + fileToUploadPath, MessageType.FILE, username + "@" + domainName, "uploaded");
-            }
         } catch (Exception e) {
             Toast.makeText(getApplication(), "Error sending file", Toast.LENGTH_SHORT).show();
             Log.e("XmppCore", "File Sharing Error" + e.toString());
         }
+    }
+
+
+    public void sendFileMessage(final String fileToUploadPath){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (Utils.isImage(fileToUploadPath)) {
+                    Log.i("FileUpload", "sendFile(): isImage = true");
+                    sendTextMessage("##image##" + fileToUploadPath, MessageType.IMAGE, username + "@" + domainName, "uploaded");
+                } else {
+                    Log.i("FileUpload", "sendFile(): isImage = false");
+                    sendTextMessage("##file##" + fileToUploadPath, MessageType.FILE, username + "@" + domainName, "uploaded");
+                }
+            }
+        });
     }
 
 

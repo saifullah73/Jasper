@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements About.OnFragmentI
                 public void presenceChanged(Presence presence) {
                     String username = presence.getFrom().toString().substring(0,presence.getFrom().toString().indexOf("@"));
                     Constants.map.put(username,presence.getFrom().getResourceOrEmpty().toString());
-                    Log.i("ResourceChanged", "User = "+ username + " Resource = "+presence.getFrom().getResourceOrEmpty().toString());
+                    Log.i("XmppCoreR", "User = "+ username + " Resource = "+presence.getFrom().getResourceOrEmpty().toString());
                 }
             });
 
@@ -333,6 +333,7 @@ public class MainActivity extends AppCompatActivity implements About.OnFragmentI
             Log.i("XmppCore","connection was null");
         }
     }
+
 
     public boolean addNewUser(String username){
         Presence subscribe = new Presence(Presence.Type.subscribe);
@@ -450,6 +451,7 @@ public class MainActivity extends AppCompatActivity implements About.OnFragmentI
             case R.id.logout:
                 XmppCore.getInstance().logout();
                 finish();
+                System.exit(0);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

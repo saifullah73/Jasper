@@ -3,12 +3,14 @@ package com.example.jasper.AppBackend.Xmpp;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.jasper.Activities.Chat.ChatActivity;
 import com.example.jasper.Activities.Signup;
 import com.example.jasper.AppBackend.Interfaces.CustomFileTransferListener;
 import com.example.jasper.AppBackend.Interfaces.XMPPCore;
 import com.example.jasper.AppBackend.Presistance.DBHelper;
 import com.example.jasper.Constants;
 import com.example.jasper.Models.Contact;
+import com.example.jasper.Utils;
 
 import org.jivesoftware.smack.AbstractXMPPConnection;
 import org.jivesoftware.smack.ConnectionConfiguration;
@@ -61,7 +63,7 @@ public class XmppCore implements XMPPCore {
     public XmppCore() {
         if (XMPPConnection.mConnection != null)
             mConnection = XMPPConnection.mConnection;
-        if (!XMPPConnection.mConnection.isConnected()) {
+        if (true) {
             try {
                 mConnection.connect();
                 mConnection.login();
@@ -114,12 +116,28 @@ public class XmppCore implements XMPPCore {
             Roster roster = Roster.getInstanceFor(mConnection);
             Collection<RosterEntry> entries = roster.getEntries();
             for (RosterEntry entry : entries) {
+                String username = entry.getJid().toString().substring(0,entry.getJid().toString().indexOf("@"));
                 chatList.add(new Contact(extractUserName(entry.getJid().toString()), 0));
                 Log.i("DynamicContacts", "Added " + entry.getJid());
             }
         }
         return chatList;
     }
+
+    public String getResourceOfUser(String jid){
+        Roster roster = Roster.getInstanceFor(mConnection);
+        try {
+            Presence p =  roster.getPresence(JidCreate.bareFrom(jid));
+            Log.i("XmppCoreR","got presence of "+jid+ " presence = "+ p.toString());
+            return  p.getFrom().getResourceOrEmpty().toString();
+        }
+        catch (Exception e){
+            Log.i("XmppCoreR", "Error getting presence of "+ jid);
+            Log.i("XmppCoreR", e.toString());
+            return null;
+        }
+    }
+
 
 
     private String extractUserName(String jid) {
@@ -168,6 +186,8 @@ public class XmppCore implements XMPPCore {
             org.jivesoftware.smack.packet.Message newMessage = new org.jivesoftware.smack.packet.Message();
             newMessage.setBody(messageToSend);
             try {
+                boolean f = XmppCore.instance.mConnection.isConnected();
+                Log.i("XmppCore","Send Message() isConnected = "+f);
                 chat.send(newMessage);
                 return true;
             } catch (SmackException.NotConnectedException e) {
@@ -202,7 +222,7 @@ public class XmppCore implements XMPPCore {
 
     @Override
     public void sendFile(final String username, final String pathName, String desc, final String res, CustomFileTransferListener listener) {
-        Log.i("ResourceChanged", "Got " + res);
+        Log.i("XmppCore", "File Sharing res Got " + res);
 //        if (!mConnection.isConnected()){
 //            Log.i("XmppCore", "Connection was not established");
 //            try {
@@ -237,6 +257,7 @@ public class XmppCore implements XMPPCore {
                                 break;
                         }
                     }
+                    ChatActivity.getInstance().sendFileMessage(pathName);
                     Log.i("XmppCore", "Filetransfer done " + oft.getStatus() + ". Progress: " + oft.getProgress() + ". Error " + oft.getError() + ". Exception" + oft.getException());
                 } catch (Exception e) {
                     Log.i("XmppCore", "sendFile: " + e.toString());
